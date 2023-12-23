@@ -16,12 +16,22 @@ export default class Gameboard {
     return newCells;
   }
 
+  #checkIfCellsEmpty(position) {
+    return this.cells.get(position) === "empty";
+  }
+
   addShip(coordinate, length, orientation) {
-    const ship = new Ship(coordinate, length, orientation);
-    this.ships.push(ship);
-    ship.getPositions().forEach((position) => {
-      this.cells.set(position, "ship");
-    });
+    if (this.cells.get(coordinate) === "empty") {
+      const ship = new Ship(coordinate, length, orientation);
+      if (ship.getPositions().every(this.#checkIfCellsEmpty.bind(this))) {
+        this.ships.push(ship);
+        ship.getPositions().forEach((position) => {
+          this.cells.set(position, "ship");
+        });
+        return true;
+      }
+    }
+    return false;
   }
 
   getCells() {
