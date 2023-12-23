@@ -41,7 +41,6 @@ test("Hit  increase", () => {
 
 test("Was hit successful True", () => {
   const ship = new Ship("[2,3]", 5, "horizontal");
-  ship.hit("[4,3]");
   expect(ship.hit("[4,3]")).toBe(true);
 });
 

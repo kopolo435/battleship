@@ -34,7 +34,10 @@ export default class Ship {
   }
 
   hit(coordinate) {
-    if (this.positions.get(coordinate) !== undefined) {
+    if (
+      this.positions.get(coordinate) !== undefined &&
+      this.positions.get(coordinate) !== true
+    ) {
       const [xPosition, yPosition] = extractCoordinates(coordinate);
       this.positions.set(`[${xPosition},${yPosition}]`, true);
       this.hits += 1;
