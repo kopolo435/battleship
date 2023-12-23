@@ -52,7 +52,10 @@ export default class Player {
           possition[1] > -1 &&
           possition[1] < 10
         ) {
-          if (enemyBoard.get(`[${possition[0]},${possition[1]}]`) === "empty") {
+          if (
+            enemyBoard.get(`[${possition[0]},${possition[1]}]`) === "empty" ||
+            enemyBoard.get(`[${possition[0]},${possition[1]}]`) === "ship"
+          ) {
             possibleAttacks.push(`[${possition[0]},${possition[1]}]`);
           }
         }
