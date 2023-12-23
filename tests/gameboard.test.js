@@ -16,6 +16,18 @@ test("Add ship horizontal Position", () => {
   expect(cells.get("[3,3]")).toBe("ship");
 });
 
+test("Ship position on top of another, first cell", () => {
+  const board = new Gameboard();
+  board.addShip("[2,3]", 2, "horizontal");
+  expect(board.addShip("[2,3]", 2, "vertical")).toBe(false);
+});
+
+test("Ship position on top of another any cell", () => {
+  const board = new Gameboard();
+  board.addShip("[2,0]", 2, "vertical");
+  expect(board.addShip("[1,1]", 2, "horizontal")).toBe(false);
+});
+
 test("Successful attack", () => {
   const board = new Gameboard();
   board.addShip("[2,3]", 2, "horizontal");
