@@ -1,13 +1,17 @@
-console.log("hola");
 const startLink = document.getElementById("start");
-const form = document.getElementById("nameForm");
-let a = 0;
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-});
+
+function setPlayersInfo(player) {
+  let name = document.getElementById(`${player}`).value;
+  name = name === "" ? player : name;
+  const isComputer = document.getElementById(`${player}Ia`).checked;
+
+  const playerObj = { name, isComputer };
+  sessionStorage.setItem(player, JSON.stringify(playerObj));
+}
 startLink.addEventListener("click", (e) => {
   e.preventDefault();
-  a += 1;
-  sessionStorage.setItem("clicks", a);
+  setPlayersInfo("player1");
+  setPlayersInfo("player2");
+  sessionStorage.setItem("setup", "player1");
   window.location.href = "waitingPage.html";
 });
