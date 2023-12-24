@@ -5,6 +5,8 @@ module.exports = {
   entry: {
     app: "./src/index.js",
     board: "./src/board.js",
+    waiting: "./src/waitingPage.js",
+    shipSetup: "./src/shipSetup.js",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -16,6 +18,16 @@ module.exports = {
       template: "./src/board.html",
       chunks: ["board"],
       filename: "board.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/waitingPage.html",
+      chunks: ["waiting"],
+      filename: "waitingPage.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/shipSetup.html",
+      chunks: ["shipSetup"],
+      filename: "shipSetup.html",
     }),
   ],
   output: {

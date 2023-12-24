@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battleship</title>
+    <script src="index.js" defer></script>
 </head>
 <body>
-    <p>Go to player1 setup page <a href="board.html">Aqui</a></p>
+    <header><h1>Battleship</h1></header>
+    <main>
+        <form action="" id="nameForm">
+            <div id="player1Name">
+                <div class="sideLabel">
+                    <label for="player1">Player 1</label>
+                    <input  id="player1" type="text" placeholder="player1">
+                </div>
+                <div class="sideLabel">
+                    <label for="player1Ia">La computadora lo controla</label>
+                    <input type="checkbox" name="player1Ia" id="player1Ia">
+                </div>
+            </div>
+            <div id="player2Name">
+                <div class="sideLabel">
+                    <label for="player2">Player 2</label>
+                    <input  id="player2" type="text" placeholder="player1">
+                </div>
+                <div class="sideLabel">
+                    <label for="player2Ia">La computadora lo controla</label>
+                    <input type="checkbox" name="player2IA" id="player2Ia">
+                </div>
+            <a href="waitingPage.html" id="start">Empezar</a>
+        </form>
+    </main>
 </body>
 </html>
