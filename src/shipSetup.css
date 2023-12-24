@@ -1,0 +1,15 @@
+body{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+main{
+    position: relative;
+}
+
+#curtain{
+    position: absolute;
+    background-color: black;
+    color: white;
+}

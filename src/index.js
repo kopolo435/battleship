@@ -13,5 +13,5 @@ startLink.addEventListener("click", (e) => {
   setPlayersInfo("player1");
   setPlayersInfo("player2");
   sessionStorage.setItem("setup", "player1");
-  window.location.href = "waitingPage.html";
+  window.location.href = "shipSetup.html";
 });

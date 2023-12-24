@@ -1,14 +1,15 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
     app: "./src/index.js",
     board: "./src/board.js",
-    waiting: "./src/waitingPage.js",
     shipSetup: "./src/shipSetup.js",
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       chunks: ["app"],
@@ -18,11 +19,6 @@ module.exports = {
       template: "./src/board.html",
       chunks: ["board"],
       filename: "board.html",
-    }),
-    new HtmlWebpackPlugin({
-      template: "./src/waitingPage.html",
-      chunks: ["waiting"],
-      filename: "waitingPage.html",
     }),
     new HtmlWebpackPlugin({
       template: "./src/shipSetup.html",
@@ -42,7 +38,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

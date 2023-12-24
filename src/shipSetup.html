@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battleship</title>
-    <script src="shipSetup.js"></script>
+    <script src="shipSetup.js" defer></script>
+    <link rel="stylesheet" href="shipSetup.css">
 </head>
 <body>
-    <h2>Posicionamiento de barcos de: <span id="playerName"></span></h2>
-    <a href="board.html">Empezar a jugar</a>
+    <main>
+        <div id="curtain">
+            <h2>Pagina de preparacion para: <span id="playerName"></span></h2>
+            <p>Asegurate que tu contrincante no pueda ver en estos momentos</p>
+            <p>Al hace click en el boton pasaras a colocar tus barcos</p>
+            <a href="shipSetup.html" id="ready">Estoy preparado</a>
+        </div>
+        <div id="shipSetup"></div>
+    </main>
 </body>
 </html>
