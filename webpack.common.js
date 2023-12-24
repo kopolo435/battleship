@@ -4,10 +4,18 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: {
     app: "./src/index.js",
+    board: "./src/board.js",
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      chunks: ["app"],
+      filename: "index.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/board.html",
+      chunks: ["board"],
+      filename: "board.html",
     }),
   ],
   output: {

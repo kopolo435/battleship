@@ -1,4 +1,4 @@
-import * as mainLoop from "../src/index";
+import * as mainLoop from "../src/board";
 import Player from "../src/player";
 
 test("Player creation", () => {
