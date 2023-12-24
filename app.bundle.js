@@ -1,2 +1,2 @@
-(self.webpackChunkbattleship=self.webpackChunkbattleship||[]).push([[143],{880:()=>{console.log("hola")}},e=>{e(e.s=880)}]);
+(self.webpackChunkbattleship=self.webpackChunkbattleship||[]).push([[143],{880:()=>{console.log("hola");const e=document.getElementById("start"),t=document.getElementById("nameForm");let n=0;t.addEventListener("submit",(e=>{e.preventDefault()})),e.addEventListener("click",(e=>{e.preventDefault(),n+=1,sessionStorage.setItem("clicks",n),window.location.href="waitingPage.html"}))}},e=>{e(e.s=880)}]);
 //# sourceMappingURL=app.bundle.js.map
