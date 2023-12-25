@@ -7,12 +7,23 @@
     <script src="shipSetup.js" defer></script>
 </head>
 <body>
-    <main id="board">
+    <main>
+        <h2>Battleship</h2>
         <div id="shipSetup">
-            <h2>Hola</h2>
+            <div id="board"></div>
+            <aside id="sideBar">
+                <div id="shipList">
+                    <button id="carrier" data-length="6">Carrier</button>
+                    <button id="battleship" data-length="5">Battleship</button>
+                    <button id="submarine" data-length="4">Submarine</button>
+                    <button id="destroyer1" data-length="2">Destroyer</button>
+                    <button id="destroyer2" data-length="2">Destroyer</button>
+                </div>
+                <button id="next">Siguiente</button>
+            </aside>
         </div>
-        <button id="next">Siguiente</button>
     </main>
+    <footer>Hola</footer>
     <div id="curtain">
         <h2>Pagina de preparacion para: <span id="playerName"></span></h2>
         <p>Asegurate que tu contrincante no pueda ver en estos momentos</p>

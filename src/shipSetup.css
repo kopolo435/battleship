@@ -1,15 +1,55 @@
 body{
     display: flex;
     flex-direction: column;
-    height: fit-content;
+    margin: 0px;
+    height: 100vh;
+    position: relative;
 }
 
 main{
     position: relative;
+    height: 100vh;
+    display: none;
+    display: flex;
+    flex-direction: column;
 }
 
 #curtain{
     position: absolute;
     background-color: black;
     color: white;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    transition: height 0.5s  ease-in-out;
+}
+
+#curtain.closed{
+    height: 0px;
+}
+
+#shipList{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    justify-content: space-around;
+}
+
+#shipSetup{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+#board{
+    width: 45vw;
+    height: 80vh;
+    background-color: gray;
+}
+
+#sideBar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
