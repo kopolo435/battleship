@@ -53,4 +53,17 @@ function setPageLink(link) {
   });
 }
 
-export { fillGrid, addShipSelection, displayChangeOnReady, setPageLink };
+function changeCellToShip(coordinates, cellMap) {
+  coordinates.forEach((coordinate) => {
+    const cell = cellMap.get(coordinate);
+    cell.classList.add("ship");
+  });
+}
+
+export {
+  fillGrid,
+  addShipSelection,
+  displayChangeOnReady,
+  setPageLink,
+  changeCellToShip,
+};
