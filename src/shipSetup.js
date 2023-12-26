@@ -4,11 +4,13 @@ import {
   addShipSelection,
   displayChangeOnReady,
   setPageLink,
+  changeCellToShip,
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 
 const gameboard = new Gameboard();
 const ships = new Map();
+const cellMap = new Map();
 
 function setNextPage(player) {
   if (player === "player1") {
@@ -36,6 +38,8 @@ function onCellClick(event) {
     if (ship) {
       const shipId = sessionStorage.getItem("shipId");
       ships.set(shipId, ship);
+      console.log(ship);
+      changeCellToShip(ship.getPositions(), cellMap);
     } else {
       console.log("Elija otra posicion para el barco");
     }
@@ -52,6 +56,7 @@ const cellList = board.querySelectorAll(".cell");
 
 Array.from(cellList).forEach((cell) => {
   cell.addEventListener("click", onCellClick);
+  cellMap.set(cell.dataset.id, cell);
 });
 
 orientation.addEventListener("change", () => {
@@ -64,4 +69,5 @@ readyBtn.addEventListener("click", () => {
 });
 
 addShipSelection();
-sessionStorage.setItem("orientation", orientation.value);
+sessionStorage.setItem("shipOrientation", orientation.value);
+sessionStorage.removeItem("shipLength");
