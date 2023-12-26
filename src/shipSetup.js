@@ -11,6 +11,7 @@ import {
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
+import * as custom from "./jsonConversion.js";
 
 let gameboard = new Gameboard();
 let ships = new Map();
@@ -99,6 +100,7 @@ const readyBtn = document.getElementById("ready");
 const board = document.getElementById("board");
 const orientation = document.getElementById("orientation");
 const restBtn = document.getElementById("reset");
+const nextBtn = document.getElementById("next");
 fillGrid(10, board);
 const cellList = board.querySelectorAll(".cell");
 
@@ -118,6 +120,13 @@ readyBtn.addEventListener("click", () => {
 });
 
 restBtn.addEventListener("click", resetBoard);
+
+nextBtn.addEventListener("click", () => {
+  gameboard.setShips(ships);
+  const jsonText = JSON.stringify(gameboard, custom.replacer);
+  const currentPlayer = sessionStorage.getItem("setup");
+  sessionStorage.setItem(`${currentPlayer}Gameboard`, jsonText);
+});
 
 addShipSelection();
 sessionStorage.setItem("shipOrientation", orientation.value);
