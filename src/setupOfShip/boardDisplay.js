@@ -46,13 +46,6 @@ function displayChangeOnReady() {
   curtain.classList.add("closed");
 }
 
-function setPageLink(link) {
-  const nextPage = document.getElementById("next");
-  nextPage.addEventListener("click", () => {
-    window.location.href = link;
-  });
-}
-
 function changeCellToShip(coordinates, cellMap) {
   coordinates.forEach((coordinate) => {
     const cell = cellMap.get(coordinate);
@@ -88,7 +81,6 @@ export {
   fillGrid,
   addShipSelection,
   displayChangeOnReady,
-  setPageLink,
   changeCellToShip,
   disableShipBtn,
   validateAllShipsReady,

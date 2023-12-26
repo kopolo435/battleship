@@ -15,14 +15,15 @@ import * as custom from "./jsonConversion.js";
 
 let gameboard = new Gameboard();
 let ships = new Map();
+let nextPageLink = "";
 const cellMap = new Map();
 
 function setNextPage(player) {
   if (player === "player1") {
     sessionStorage.setItem("setup", "player2");
-    setPageLink("shipSetup.html");
+    nextPageLink = "shipSetup.html";
   } else {
-    setPageLink("board.html");
+    nextPageLink = "board.html";
   }
 }
 
@@ -116,7 +117,6 @@ orientation.addEventListener("change", () => {
 
 readyBtn.addEventListener("click", () => {
   displayChangeOnReady();
-  setNextPage(sessionStorage.getItem("setup"));
 });
 
 restBtn.addEventListener("click", resetBoard);
@@ -126,8 +126,10 @@ nextBtn.addEventListener("click", () => {
   const jsonText = JSON.stringify(gameboard, custom.replacer);
   const currentPlayer = sessionStorage.getItem("setup");
   sessionStorage.setItem(`${currentPlayer}Gameboard`, jsonText);
+  window.location.href = nextPageLink;
 });
 
 addShipSelection();
+setNextPage(sessionStorage.getItem("setup"));
 sessionStorage.setItem("shipOrientation", orientation.value);
 sessionStorage.removeItem("shipLength");
