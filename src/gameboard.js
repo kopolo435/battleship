@@ -55,4 +55,15 @@ export default class Gameboard {
   allShipsSunk() {
     return this.ships.every((ship) => ship.isSunk());
   }
+
+  setShips(shipsMap) {
+    const shipArray = [];
+    shipsMap.forEach((shipObj) => {
+      shipArray.push(shipObj);
+      shipObj.getPositions().forEach((cell) => {
+        this.cells.set(cell, "ship");
+      });
+    });
+    this.ships = shipArray;
+  }
 }
