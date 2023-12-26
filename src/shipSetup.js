@@ -1,12 +1,12 @@
 import style from "./shipSetup.css";
+import { fillGrid, addShipSelection } from "./setupOfShip/boardDisplay";
 
 const readyBtn = document.getElementById("ready");
+const board = document.getElementById("board");
 
 function displayChangeOnReady() {
   const curtain = document.getElementById("curtain");
-  const main = document.getElementById("board");
   curtain.classList.add("closed");
-  main.style.display = "flex";
 }
 
 function setPageLink(link) {
@@ -24,7 +24,8 @@ function setNextPage(player) {
     setPageLink("board.html");
   }
 }
-
+fillGrid(10, board);
+addShipSelection();
 readyBtn.addEventListener("click", () => {
   displayChangeOnReady();
   setNextPage(sessionStorage.getItem("setup"));
