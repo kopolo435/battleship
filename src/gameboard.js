@@ -20,10 +20,14 @@ export default class Gameboard {
     return this.cells.get(position) === "empty";
   }
 
+  checkIfPositionsAvailable(ship) {
+    return ship.getPositions().every(this.#checkIfCellsEmpty.bind(this));
+  }
+
   addShip(coordinate, length, orientation) {
     if (this.cells.get(coordinate) === "empty") {
       const ship = new Ship(coordinate, length, orientation);
-      if (ship.getPositions().every(this.#checkIfCellsEmpty.bind(this))) {
+      if (this.checkIfPositionsAvailable(ship)) {
         this.ships.push(ship);
         ship.getPositions().forEach((position) => {
           this.cells.set(position, "ship");
