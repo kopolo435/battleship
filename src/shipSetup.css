@@ -57,6 +57,18 @@ main{
     background-color: aqua;
 }
 
+.cell.ship{
+    background-color: gray;
+}
+
+.hover.valid{
+    background-color: green;
+}
+
+.hover.invalid{
+    background-color: red;
+}
+
 #sideBar{
     display: flex;
     flex-direction: column;
