@@ -27,7 +27,7 @@ function shipSelect(event) {
   const { length } = event.target.closest("[data-length]").dataset;
   const { id } = event.target;
   sessionStorage.setItem("shipLength", `${length}`);
-  sessionStorage.setItem("buttonId", `${id}`);
+  sessionStorage.setItem("shipId", `${id}`);
 }
 
 function addShipSelection() {
@@ -41,4 +41,16 @@ function addShipSelection() {
   });
 }
 
-export { fillGrid, addShipSelection };
+function displayChangeOnReady() {
+  const curtain = document.getElementById("curtain");
+  curtain.classList.add("closed");
+}
+
+function setPageLink(link) {
+  const nextPage = document.getElementById("next");
+  nextPage.addEventListener("click", () => {
+    window.location.href = link;
+  });
+}
+
+export { fillGrid, addShipSelection, displayChangeOnReady, setPageLink };
