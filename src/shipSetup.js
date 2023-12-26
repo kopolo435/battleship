@@ -7,12 +7,13 @@ import {
   changeCellToShip,
   disableShipBtn,
   validateAllShipsReady,
+  changeButtonStatus,
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
 
-const gameboard = new Gameboard();
-const ships = new Map();
+let gameboard = new Gameboard();
+let ships = new Map();
 const cellMap = new Map();
 
 function setNextPage(player) {
@@ -85,9 +86,19 @@ function onCellHover(event) {
   }
 }
 
+function resetBoard() {
+  ships = new Map();
+  gameboard = new Gameboard();
+  cellMap.forEach((cell) => {
+    cell.classList.remove("ship");
+  });
+  changeButtonStatus();
+}
+
 const readyBtn = document.getElementById("ready");
 const board = document.getElementById("board");
 const orientation = document.getElementById("orientation");
+const restBtn = document.getElementById("reset");
 fillGrid(10, board);
 const cellList = board.querySelectorAll(".cell");
 
@@ -105,6 +116,8 @@ readyBtn.addEventListener("click", () => {
   displayChangeOnReady();
   setNextPage(sessionStorage.getItem("setup"));
 });
+
+restBtn.addEventListener("click", resetBoard);
 
 addShipSelection();
 sessionStorage.setItem("shipOrientation", orientation.value);

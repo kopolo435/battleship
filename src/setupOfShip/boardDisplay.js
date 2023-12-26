@@ -74,6 +74,16 @@ function validateAllShipsReady() {
   }
 }
 
+function changeButtonStatus() {
+  const shipBtnContainer = document.getElementById("shipList");
+  const shipButtons = shipBtnContainer.querySelectorAll("button");
+  const nextBtn = document.getElementById("next");
+  nextBtn.disabled = true;
+  Array.from(shipButtons).forEach((button) => {
+    button.disabled = false;
+  });
+}
+
 export {
   fillGrid,
   addShipSelection,
@@ -82,4 +92,5 @@ export {
   changeCellToShip,
   disableShipBtn,
   validateAllShipsReady,
+  changeButtonStatus,
 };
