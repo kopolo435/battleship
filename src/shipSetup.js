@@ -5,6 +5,8 @@ import {
   displayChangeOnReady,
   setPageLink,
   changeCellToShip,
+  disableShipBtn,
+  validateAllShipsReady,
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
@@ -39,8 +41,10 @@ function onCellClick(event) {
     if (ship) {
       const shipId = sessionStorage.getItem("shipId");
       ships.set(shipId, ship);
-      console.log(ship);
+      disableShipBtn(shipId);
+      validateAllShipsReady();
       changeCellToShip(ship.getPositions(), cellMap);
+      sessionStorage.removeItem("shipLength");
     } else {
       console.log("Elija otra posicion para el barco");
     }

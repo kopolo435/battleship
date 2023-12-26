@@ -60,10 +60,26 @@ function changeCellToShip(coordinates, cellMap) {
   });
 }
 
+function disableShipBtn(id) {
+  const button = document.getElementById(id);
+  button.disabled = true;
+}
+
+function validateAllShipsReady() {
+  const shipBtnContainer = document.getElementById("shipList");
+  const shipButtons = shipBtnContainer.querySelectorAll("button");
+  if (Array.from(shipButtons).every((button) => button.disabled)) {
+    const nextBtn = document.getElementById("next");
+    nextBtn.disabled = false;
+  }
+}
+
 export {
   fillGrid,
   addShipSelection,
   displayChangeOnReady,
   setPageLink,
   changeCellToShip,
+  disableShipBtn,
+  validateAllShipsReady,
 };
