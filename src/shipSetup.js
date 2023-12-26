@@ -7,6 +7,7 @@ import {
   changeCellToShip,
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
+import Ship from "./ship";
 
 const gameboard = new Gameboard();
 const ships = new Map();
@@ -47,6 +48,38 @@ function onCellClick(event) {
     console.log("Debe escoger un barco primero");
   }
 }
+function checkPosition(coordinate) {
+  const length = sessionStorage.getItem("shipLength");
+  const orientation = sessionStorage.getItem("shipOrientation");
+  const possibleShip = new Ship(coordinate, length, orientation);
+  if (gameboard.checkIfPositionsAvailable(possibleShip)) {
+    return { possibleShip, status: true };
+  }
+  return { possibleShip, status: false };
+}
+
+function onCellHover(event) {
+  const coordinate = event.target.dataset.id;
+  const possibleShip = checkPosition(coordinate);
+
+  cellMap.forEach((cell) => {
+    cell.classList.remove("hover", "valid", "invalid");
+  });
+
+  if (possibleShip.status) {
+    possibleShip.possibleShip.getPositions().forEach((position) => {
+      const cell = cellMap.get(position);
+      cell.classList.add("hover", "valid");
+    });
+  } else {
+    possibleShip.possibleShip.getPositions().forEach((position) => {
+      const cell = cellMap.get(position);
+      if (cell !== undefined) {
+        cell.classList.add("hover", "invalid");
+      }
+    });
+  }
+}
 
 const readyBtn = document.getElementById("ready");
 const board = document.getElementById("board");
@@ -56,6 +89,7 @@ const cellList = board.querySelectorAll(".cell");
 
 Array.from(cellList).forEach((cell) => {
   cell.addEventListener("click", onCellClick);
+  cell.addEventListener("mouseover", onCellHover);
   cellMap.set(cell.dataset.id, cell);
 });
 
