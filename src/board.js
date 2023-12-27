@@ -65,7 +65,11 @@ async function turnLoops(initialPlayer, secondPlayer) {
     updateEnemyMap(enemy.getGameboard().getCells());
     let attack;
     if (currentPlayer.getIsComputer()) {
-      // const a = await new Promise(getUserAttack); // Cambiar por cambiando compu
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(true);
+        }, 1250);
+      });
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
     } else {
       attack = await new Promise(getUserAttack);
@@ -74,6 +78,13 @@ async function turnLoops(initialPlayer, secondPlayer) {
     display.fillBoard(enemy.getGameboard().getCells(), false);
     if (enemy.getGameboard().allShipsSunk()) {
       return currentPlayer.getName();
+    }
+    if (!currentPlayer.getIsComputer() && !enemy.getIsComputer()) {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(true);
+        }, 1250);
+      });
     }
     const temp = currentPlayer;
     currentPlayer = enemy;
@@ -105,6 +116,17 @@ function parsePlayersGameboard(player) {
   return gameboard;
 }
 
+function checkIfShowCurtain(initialPlayer, secondPlayer) {
+  if (initialPlayer.getIsComputer() || secondPlayer.getIsComputer()) {
+    const clickEvent = new Event("click");
+    hideCurtainBtn.dispatchEvent(clickEvent);
+  }
+}
+
+function startNewGame() {
+  window.location.href = "index.html";
+}
+
 function setWinner(winner, player1, player2) {
   if (winner === player1.name) {
     if (player1.getIsComputer()) {
@@ -129,18 +151,18 @@ const player2Data = JSON.parse(sessionStorage.getItem("player2"));
 const player1Gameboard = parsePlayersGameboard("player1");
 const player2Gameboard = parsePlayersGameboard("player2");
 
-const player1 = new Player(player1Data.name, player1Data.isComputer);
+const player1 = new Player(player1Data.name, true);
 const player2 = new Player(player2Data.name, true); // Change when tests over
 player1.gameboard = player1Gameboard;
 player2.gameboard = player2Gameboard;
 
 const hideCurtainBtn = document.getElementById("ready");
+const newGameBtn = document.getElementById("newGame");
 hideCurtainBtn.addEventListener("click", display.hideCurtain);
 const { initialPlayer, secondPlayer } = chooseInitialPlayer(player1, player2);
-if (initialPlayer.getIsComputer() || secondPlayer.getIsComputer()) {
-  const clickEvent = new Event("click");
-  hideCurtainBtn.dispatchEvent(clickEvent);
-}
+checkIfShowCurtain(initialPlayer, secondPlayer);
 const winner = await turnLoops(initialPlayer, secondPlayer);
 setWinner(winner, player1, player2);
+newGameBtn.disabled = false;
+newGameBtn.addEventListener("click", startNewGame);
 console.log(winner);
