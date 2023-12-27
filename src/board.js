@@ -9,7 +9,7 @@ function createCellAttackEvent(resolve) {
   const chooseAttack = () => "[4,0]";
   button.addEventListener("click", () => {
     const chosenAttack = chooseAttack();
-    setTimeout(() => resolve(chosenAttack), 5000);
+    setTimeout(() => resolve(chosenAttack), 2000);
   });
 }
 
@@ -23,14 +23,15 @@ async function turnLoops(initialPlayer, secondPlayer, chooseAttack) {
   let enemy = secondPlayer;
   while (!enemy.getGameboard().allShipsSunk()) {
     display.showCurtain();
+    display.fillBoard(currentPlayer.getGameboard().getCells(), true);
+    display.fillBoard(enemy.getGameboard().getCells(), false);
     let attack;
     if (currentPlayer.getIsComputer()) {
+      const a = await new Promise(getUserAttack); // Cambiar por cambiando compu
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
     } else {
-      console.log("start");
       attack = await new Promise(getUserAttack);
     }
-    console.log("end");
     enemy.getGameboard().receiveAttack(attack);
     if (enemy.getGameboard().allShipsSunk()) {
       return currentPlayer.getName();

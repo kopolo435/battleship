@@ -8,4 +8,55 @@ function hideCurtain() {
   curtain.classList.add("closed");
 }
 
-export { showCurtain, hideCurtain };
+function createCell(coordinate, type) {
+  const div = document.createElement("div");
+  div.classList.add("cell");
+  div.setAttribute("data-id", coordinate);
+  switch (type) {
+    case "empty":
+      div.classList.add("empty");
+      break;
+    case "ship":
+      div.classList.add("ship");
+      break;
+    case "hit":
+      div.classList.add("hit");
+      break;
+    case "miss":
+      div.classList.add("miss");
+      break;
+    default:
+  }
+  return div;
+}
+
+function fillBoard(gameboard, showShips) {
+  if (showShips) {
+    const currentBoard = document.getElementById("currentBoard");
+    currentBoard.replaceChildren();
+    for (let y = 10 - 1; y >= 0; y -= 1) {
+      for (let x = 0; x < 10; x += 1) {
+        const coordinate = `[${x},${y}]`;
+        currentBoard.appendChild(
+          createCell(coordinate, gameboard.get(coordinate))
+        );
+      }
+    }
+  } else {
+    const enemyBoard = document.getElementById("enemyBoard");
+    enemyBoard.replaceChildren();
+    for (let y = 10 - 1; y >= 0; y -= 1) {
+      for (let x = 0; x < 10; x += 1) {
+        const coordinate = `[${x},${y}]`;
+        const value = gameboard.get(coordinate);
+        if (value === "ship") {
+          enemyBoard.appendChild(createCell(coordinate, "empty"));
+        } else {
+          enemyBoard.appendChild(createCell(coordinate, value));
+        }
+      }
+    }
+  }
+}
+
+export { showCurtain, hideCurtain, fillBoard };
