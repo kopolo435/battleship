@@ -123,12 +123,13 @@ restBtn.addEventListener("click", resetBoard);
 nextBtn.addEventListener("click", () => {
   gameboard.setShips(ships);
   const jsonText = JSON.stringify(gameboard, replacer);
-  const currentPlayer = sessionStorage.getItem("setup");
+  const currentPlayer = sessionStorage.getItem("current");
   sessionStorage.setItem(`${currentPlayer}Gameboard`, jsonText);
   window.location.href = nextPageLink;
 });
 
 addShipSelection();
+sessionStorage.setItem("current", sessionStorage.getItem("setup"));
 setNextPage(sessionStorage.getItem("setup"));
 sessionStorage.setItem("shipOrientation", orientation.value);
 sessionStorage.removeItem("shipLength");
