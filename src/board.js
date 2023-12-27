@@ -1,6 +1,8 @@
 import Player from "./player";
 import extractCoordinates from "./extractCoordinates";
 import { reviver } from "./jsonConversion";
+import * as display from "./setupOfShip/boardDom";
+import style from "./styles/board.css";
 
 function createCellAttackEvent(resolve) {
   const button = document.getElementById("test");
@@ -20,6 +22,7 @@ async function turnLoops(initialPlayer, secondPlayer, chooseAttack) {
   let currentPlayer = initialPlayer;
   let enemy = secondPlayer;
   while (!enemy.getGameboard().allShipsSunk()) {
+    display.showCurtain();
     let attack;
     if (currentPlayer.getIsComputer()) {
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
@@ -72,6 +75,9 @@ const player1 = new Player(player1Data.name, player1Data.isComputer);
 const player2 = new Player(player2Data.name, true); // Change when tests over
 player1.gameboard = player1Gameboard;
 player2.gameboard = player2Gameboard;
+
+const hideCurtainBtn = document.getElementById("ready");
+hideCurtainBtn.addEventListener("click", display.hideCurtain);
 const chooseAttack = () => "[4,0]";
 const { initialPlayer, secondPlayer } = chooseInitialPlayer(player1, player2);
 const winner = await turnLoops(initialPlayer, secondPlayer, chooseAttack);
