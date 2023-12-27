@@ -4,12 +4,47 @@ import { reviver } from "./jsonConversion";
 import * as display from "./setupOfShip/boardDom";
 import style from "./styles/board.css";
 
+let enemyMap = new Map();
+function updateEnemyMap(gameboard) {
+  const replaceMap = new Map();
+  gameboard.forEach((value, index) => {
+    replaceMap.set(index, value);
+  });
+  enemyMap = replaceMap;
+}
+
+function hoverEvent(event) {
+  const cell = event.target;
+  if (
+    enemyMap.get(cell.dataset.id) !== "hit" &&
+    enemyMap.get(cell.dataset.id) !== "miss"
+  ) {
+    cell.classList.add("hover", "valid");
+  } else {
+    cell.classList.remove("valid");
+    cell.classList.add("hover", "invalid");
+  }
+}
 function createCellAttackEvent(resolve) {
-  const button = document.getElementById("test");
-  const chooseAttack = () => "[4,0]";
-  button.addEventListener("click", () => {
-    const chosenAttack = chooseAttack();
-    setTimeout(() => resolve(chosenAttack), 2000);
+  const enemyBoard = document.getElementById("enemyBoard");
+  const cells = enemyBoard.querySelectorAll(".cell");
+  Array.from(cells).forEach((cell) => {
+    cell.addEventListener("click", () => {
+      const coordinate = cell.dataset.id;
+      if (
+        enemyMap.get(coordinate) === "hit" ||
+        enemyMap.get(coordinate) === "miss"
+      ) {
+        console.log("elija otra casilla");
+      } else {
+        resolve(coordinate);
+      }
+    });
+
+    cell.addEventListener("mouseover", hoverEvent);
+    cell.addEventListener("mouseout", () => {
+      cell.classList.remove("hover", "invalid", "valid");
+    });
   });
 }
 
@@ -18,21 +53,26 @@ async function getUserAttack(resolve) {
   return attackCoordinates;
 }
 
-async function turnLoops(initialPlayer, secondPlayer, chooseAttack) {
+async function turnLoops(initialPlayer, secondPlayer) {
   let currentPlayer = initialPlayer;
   let enemy = secondPlayer;
   while (!enemy.getGameboard().allShipsSunk()) {
-    display.showCurtain();
+    if (!currentPlayer.getIsComputer() && !enemy.getIsComputer()) {
+      display.showCurtain();
+    }
     display.fillBoard(currentPlayer.getGameboard().getCells(), true);
     display.fillBoard(enemy.getGameboard().getCells(), false);
+    updateEnemyMap(enemy.getGameboard().getCells());
     let attack;
     if (currentPlayer.getIsComputer()) {
-      const a = await new Promise(getUserAttack); // Cambiar por cambiando compu
+      // const a = await new Promise(getUserAttack); // Cambiar por cambiando compu
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
     } else {
       attack = await new Promise(getUserAttack);
+      console.log(attack);
     }
     enemy.getGameboard().receiveAttack(attack);
+    display.fillBoard(enemy.getGameboard().getCells(), false);
     if (enemy.getGameboard().allShipsSunk()) {
       return currentPlayer.getName();
     }
@@ -45,7 +85,8 @@ async function turnLoops(initialPlayer, secondPlayer, chooseAttack) {
 
 function chooseInitialPlayer(player1, player2) {
   const names = [player1.name, player2.name];
-  const nameChoosen = names[Math.floor(Math.random() * (names.length - 1))];
+  const nameChoosen = names[Math.floor(Math.random() * 2)];
+  console.log(nameChoosen);
   let initialPlayer;
   let secondPlayer;
   if (nameChoosen === player1.name) {
@@ -79,8 +120,11 @@ player2.gameboard = player2Gameboard;
 
 const hideCurtainBtn = document.getElementById("ready");
 hideCurtainBtn.addEventListener("click", display.hideCurtain);
-const chooseAttack = () => "[4,0]";
 const { initialPlayer, secondPlayer } = chooseInitialPlayer(player1, player2);
-const winner = await turnLoops(initialPlayer, secondPlayer, chooseAttack);
+if (initialPlayer.getIsComputer() || secondPlayer.getIsComputer()) {
+  const clickEvent = new Event("click");
+  hideCurtainBtn.dispatchEvent(clickEvent);
+}
+const winner = await turnLoops(initialPlayer, secondPlayer);
 
 console.log(winner);
