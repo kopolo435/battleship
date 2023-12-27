@@ -69,7 +69,6 @@ async function turnLoops(initialPlayer, secondPlayer) {
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
     } else {
       attack = await new Promise(getUserAttack);
-      console.log(attack);
     }
     enemy.getGameboard().receiveAttack(attack);
     display.fillBoard(enemy.getGameboard().getCells(), false);
@@ -86,7 +85,6 @@ async function turnLoops(initialPlayer, secondPlayer) {
 function chooseInitialPlayer(player1, player2) {
   const names = [player1.name, player2.name];
   const nameChoosen = names[Math.floor(Math.random() * 2)];
-  console.log(nameChoosen);
   let initialPlayer;
   let secondPlayer;
   if (nameChoosen === player1.name) {
@@ -105,6 +103,24 @@ function parsePlayersGameboard(player) {
     reviver
   );
   return gameboard;
+}
+
+function setWinner(winner, player1, player2) {
+  if (winner === player1.name) {
+    if (player1.getIsComputer()) {
+      display.finalBoard(player2.getGameboard().getCells(), true);
+      display.finalBoard(player1.getGameboard().getCells(), false);
+    } else {
+      display.finalBoard(player1.getGameboard().getCells(), true);
+      display.finalBoard(player2.getGameboard().getCells(), false);
+    }
+  } else if (player2.getIsComputer()) {
+    display.finalBoard(player1.getGameboard().getCells(), true);
+    display.finalBoard(player2.getGameboard().getCells(), false);
+  } else {
+    display.finalBoard(player2.getGameboard().getCells(), true);
+    display.finalBoard(player1.getGameboard().getCells(), false);
+  }
 }
 
 const player1Data = JSON.parse(sessionStorage.getItem("player1"));
@@ -126,5 +142,5 @@ if (initialPlayer.getIsComputer() || secondPlayer.getIsComputer()) {
   hideCurtainBtn.dispatchEvent(clickEvent);
 }
 const winner = await turnLoops(initialPlayer, secondPlayer);
-
+setWinner(winner, player1, player2);
 console.log(winner);

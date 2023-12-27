@@ -59,4 +59,26 @@ function fillBoard(gameboard, showShips) {
   }
 }
 
-export { showCurtain, hideCurtain, fillBoard };
+function finalBoard(gameboard, isWinner) {
+  if (isWinner) {
+    const board = document.getElementById("currentBoard");
+    board.replaceChildren();
+    for (let y = 10 - 1; y >= 0; y -= 1) {
+      for (let x = 0; x < 10; x += 1) {
+        const coordinate = `[${x},${y}]`;
+        board.appendChild(createCell(coordinate, gameboard.get(coordinate)));
+      }
+    }
+  } else {
+    const board = document.getElementById("enemyBoard");
+    board.replaceChildren();
+    for (let y = 10 - 1; y >= 0; y -= 1) {
+      for (let x = 0; x < 10; x += 1) {
+        const coordinate = `[${x},${y}]`;
+        board.appendChild(createCell(coordinate, gameboard.get(coordinate)));
+      }
+    }
+  }
+}
+
+export { showCurtain, hideCurtain, fillBoard, finalBoard };
