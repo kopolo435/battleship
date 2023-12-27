@@ -65,11 +65,13 @@ async function turnLoops(initialPlayer, secondPlayer) {
     updateEnemyMap(enemy.getGameboard().getCells());
     let attack;
     if (currentPlayer.getIsComputer()) {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 1250);
-      });
+      if (currentPlayer.getIsComputer() && enemy.getIsComputer()) {
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(true);
+          }, 500);
+        });
+      }
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
     } else {
       attack = await new Promise(getUserAttack);
@@ -79,7 +81,13 @@ async function turnLoops(initialPlayer, secondPlayer) {
     if (enemy.getGameboard().allShipsSunk()) {
       return currentPlayer.getName();
     }
-    if (!currentPlayer.getIsComputer() && !enemy.getIsComputer()) {
+    if (!currentPlayer.getIsComputer()) {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(true);
+        }, 1250);
+      });
+    } else if (currentPlayer.getIsComputer() && enemy.getIsComputer()) {
       await new Promise((resolve) => {
         setTimeout(() => {
           resolve(true);
@@ -151,8 +159,8 @@ const player2Data = JSON.parse(sessionStorage.getItem("player2"));
 const player1Gameboard = parsePlayersGameboard("player1");
 const player2Gameboard = parsePlayersGameboard("player2");
 
-const player1 = new Player(player1Data.name, true);
-const player2 = new Player(player2Data.name, true); // Change when tests over
+const player1 = new Player(player1Data.name, player1Data.isComputer);
+const player2 = new Player(player2Data.name, player2Data.isComputer); // Change when tests over
 player1.gameboard = player1Gameboard;
 player2.gameboard = player2Gameboard;
 
