@@ -28,21 +28,13 @@ main{
     height: 0px;
 }
 
-#shipList{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
-    justify-content: space-around;
-}
-
 #boardsContainer{
     display: flex;
     gap: 20px;
     justify-content: space-around;
 }
 
-#board{
+#currentBoard,#enemyBoard{
     width: 45vw;
     height: 80vh;
     background-color: black;
@@ -61,6 +53,13 @@ main{
     background-color: gray;
 }
 
+.cell.miss{
+    background-color: yellow;
+}
+
+.cell.hit{
+    background-color: green;
+}
 .hover.valid{
     background-color: green;
 }
