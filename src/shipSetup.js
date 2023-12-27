@@ -11,7 +11,7 @@ import {
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
-import * as custom from "./jsonConversion.js";
+import replacer from "./jsonConversion";
 
 let gameboard = new Gameboard();
 let ships = new Map();
@@ -123,7 +123,7 @@ restBtn.addEventListener("click", resetBoard);
 
 nextBtn.addEventListener("click", () => {
   gameboard.setShips(ships);
-  const jsonText = JSON.stringify(gameboard, custom.replacer);
+  const jsonText = JSON.stringify(gameboard, replacer);
   const currentPlayer = sessionStorage.getItem("setup");
   sessionStorage.setItem(`${currentPlayer}Gameboard`, jsonText);
   window.location.href = nextPageLink;
