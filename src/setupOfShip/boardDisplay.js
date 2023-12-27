@@ -77,6 +77,14 @@ function changeButtonStatus() {
   });
 }
 
+function setCurtainName() {
+  const playerName = document.getElementById("playerName");
+  const player = JSON.parse(
+    sessionStorage.getItem(sessionStorage.getItem("current"))
+  );
+  playerName.textContent = player.name;
+}
+
 export {
   fillGrid,
   addShipSelection,
@@ -85,4 +93,5 @@ export {
   disableShipBtn,
   validateAllShipsReady,
   changeButtonStatus,
+  setCurtainName,
 };
