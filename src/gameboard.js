@@ -43,13 +43,17 @@ export default class Gameboard {
   }
 
   receiveAttack(coordinate) {
+    let hitStatus = false;
     this.ships.forEach((ship) => {
       if (ship.hit(coordinate)) {
-        this.cells.set(coordinate, "hit");
-      } else {
-        this.cells.set(coordinate, "miss");
+        hitStatus = true;
       }
     });
+    if (hitStatus) {
+      this.cells.set(coordinate, "hit");
+    } else {
+      this.cells.set(coordinate, "miss");
+    }
   }
 
   allShipsSunk() {
