@@ -7,10 +7,12 @@ import {
   disableShipBtn,
   validateAllShipsReady,
   changeButtonStatus,
+  setCurtainName,
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
 import { replacer } from "./jsonConversion";
+import computerPositions from "./setupOfShip/autoShipPosition";
 
 let gameboard = new Gameboard();
 let ships = new Map();
@@ -87,6 +89,20 @@ function onCellHover(event) {
   }
 }
 
+function checkIfComputer() {
+  const current = sessionStorage.getItem("current");
+  const { isComputer } = JSON.parse(sessionStorage.getItem(current));
+  const shipBtnContainer = document.getElementById("shipList");
+  const shipButtons = shipBtnContainer.querySelectorAll("button");
+  if (isComputer) {
+    gameboard = computerPositions(shipButtons);
+    const jsonText = JSON.stringify(gameboard, replacer);
+    const currentPlayer = sessionStorage.getItem("current");
+    sessionStorage.setItem(`${currentPlayer}Gameboard`, jsonText);
+    window.location.href = nextPageLink;
+  }
+}
+
 function resetBoard() {
   ships = new Map();
   gameboard = new Gameboard();
@@ -127,9 +143,10 @@ nextBtn.addEventListener("click", () => {
   sessionStorage.setItem(`${currentPlayer}Gameboard`, jsonText);
   window.location.href = nextPageLink;
 });
-
 addShipSelection();
 sessionStorage.setItem("current", sessionStorage.getItem("setup"));
-setNextPage(sessionStorage.getItem("setup"));
+setCurtainName();
+setNextPage(sessionStorage.getItem("current"));
 sessionStorage.setItem("shipOrientation", orientation.value);
 sessionStorage.removeItem("shipLength");
+checkIfComputer();
