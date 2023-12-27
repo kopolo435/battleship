@@ -3,7 +3,6 @@ import {
   fillGrid,
   addShipSelection,
   displayChangeOnReady,
-  setPageLink,
   changeCellToShip,
   disableShipBtn,
   validateAllShipsReady,
@@ -11,7 +10,7 @@ import {
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
-import replacer from "./jsonConversion";
+import { replacer } from "./jsonConversion";
 
 let gameboard = new Gameboard();
 let ships = new Map();
