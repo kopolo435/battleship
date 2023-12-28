@@ -13,18 +13,6 @@ function updateEnemyMap(gameboard) {
   enemyMap = replaceMap;
 }
 
-function hoverEvent(event) {
-  const cell = event.target;
-  if (
-    enemyMap.get(cell.dataset.id) !== "hit" &&
-    enemyMap.get(cell.dataset.id) !== "miss"
-  ) {
-    cell.classList.add("hover", "valid");
-  } else {
-    cell.classList.remove("valid");
-    cell.classList.add("hover", "invalid");
-  }
-}
 function createCellAttackEvent(resolve) {
   const enemyBoard = document.getElementById("enemyBoard");
   const cells = enemyBoard.querySelectorAll(".cell");
@@ -39,11 +27,6 @@ function createCellAttackEvent(resolve) {
       } else {
         resolve(coordinate);
       }
-    });
-
-    cell.addEventListener("mouseover", hoverEvent);
-    cell.addEventListener("mouseout", () => {
-      cell.classList.remove("hover", "invalid", "valid");
     });
   });
 }
@@ -63,14 +46,11 @@ async function turnLoops(initialPlayer, secondPlayer) {
     display.fillBoard(currentPlayer.getGameboard().getCells(), true);
     display.fillBoard(enemy.getGameboard().getCells(), false);
     updateEnemyMap(enemy.getGameboard().getCells());
+    display.addCellsHoverEvent(enemyMap);
     let attack;
     if (currentPlayer.getIsComputer()) {
       if (currentPlayer.getIsComputer() && enemy.getIsComputer()) {
-        await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(true);
-          }, 500);
-        });
+        await new Promise((resolve) => setTimeout(resolve, 500));
       }
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
     } else {
@@ -78,21 +58,15 @@ async function turnLoops(initialPlayer, secondPlayer) {
     }
     enemy.getGameboard().receiveAttack(attack);
     display.fillBoard(enemy.getGameboard().getCells(), false);
+    updateEnemyMap(enemy.getGameboard().getCells());
+    display.addCellsHoverEvent(enemyMap);
     if (enemy.getGameboard().allShipsSunk()) {
       return currentPlayer.getName();
     }
     if (!currentPlayer.getIsComputer()) {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 1250);
-      });
+      await new Promise((resolve) => setTimeout(resolve, 1250));
     } else if (currentPlayer.getIsComputer() && enemy.getIsComputer()) {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 1250);
-      });
+      await new Promise((resolve) => setTimeout(resolve, 1250));
     }
     const temp = currentPlayer;
     currentPlayer = enemy;

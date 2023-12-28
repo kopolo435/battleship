@@ -30,6 +30,31 @@ function createCell(coordinate, type) {
   return div;
 }
 
+function hoverEvent(cell, enemyMap) {
+  if (
+    enemyMap.get(cell.dataset.id) !== "hit" &&
+    enemyMap.get(cell.dataset.id) !== "miss"
+  ) {
+    cell.classList.add("hover", "valid");
+  } else {
+    cell.classList.remove("valid");
+    cell.classList.add("hover", "invalid");
+  }
+}
+
+function addCellsHoverEvent(enemyMap) {
+  const enemyBoard = document.getElementById("enemyBoard");
+  const cells = enemyBoard.querySelectorAll(".cell");
+  cells.forEach((cell) => {
+    cell.addEventListener("mouseover", () => {
+      hoverEvent(cell, enemyMap);
+    });
+    cell.addEventListener("mouseout", () => {
+      cell.classList.remove("hover", "invalid", "valid");
+    });
+  });
+}
+
 function fillBoard(gameboard, showShips) {
   if (showShips) {
     const currentBoard = document.getElementById("currentBoard");
@@ -81,4 +106,4 @@ function finalBoard(gameboard, isWinner) {
   }
 }
 
-export { showCurtain, hideCurtain, fillBoard, finalBoard };
+export { showCurtain, hideCurtain, fillBoard, finalBoard, addCellsHoverEvent };
