@@ -26,6 +26,7 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 #curtain{
@@ -155,4 +156,23 @@ main{
 
 .showError{
     display: block;
+}
+
+#buttonContainer{
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+#buttonContainer button{
+    padding: 7px 15px;
+}
+
+footer{
+    box-sizing: border-box;
+    background-color: gray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
 }
