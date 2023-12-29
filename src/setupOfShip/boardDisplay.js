@@ -113,8 +113,9 @@ function setCurtainName() {
   pageName.textContent = player.name;
 }
 
-function showError() {
+function showError(text) {
   const error = document.getElementById("errorMessage");
+  error.textContent = text;
   error.classList.add("showError");
 }
 

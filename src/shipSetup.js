@@ -55,11 +55,10 @@ function onCellClick(event) {
       hideError();
       sessionStorage.removeItem("shipLength");
     } else {
-      console.log("Elija otra posicion para el barco");
-      showError();
+      showError("Elija otra posicion para el barco");
     }
   } else {
-    console.log("Debe escoger un barco primero");
+    showError("Debe escoger un barco primero");
   }
 }
 function checkPosition(coordinate) {
@@ -145,6 +144,7 @@ verticalRadio.addEventListener("change", () => {
 Array.from(cellList).forEach((cell) => {
   cell.addEventListener("click", onCellClick);
   cell.addEventListener("mouseover", onCellHover);
+  cell.addEventListener("touchstart", onCellHover);
   cellMap.set(cell.dataset.id, cell);
 });
 
