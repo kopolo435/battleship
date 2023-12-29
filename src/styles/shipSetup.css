@@ -1,9 +1,19 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 body{
     display: flex;
     flex-direction: column;
     margin: 0px;
     height: 100vh;
     position: relative;
+}
+
+header{
+    display: flex;
+    justify-content: center;
 }
 
 main{
@@ -22,10 +32,26 @@ main{
     width: 100%;
     overflow: hidden;
     transition: height 0.5s  ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #curtain.closed{
     height: 0px;
+}
+
+#curtainContent{
+    background-color: gray;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+
+}
+
+#ready{
+    border-radius: 10px;
+    padding: 7px 15px;
 }
 
 #shipList{
@@ -72,5 +98,37 @@ main{
 #sideBar{
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+#shipsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: gray;
+    padding: 20px 3vw;
+}
+
+#orientacionContainer{
+    border: none;
+    width: 25vw;
+    background-color: beige;
+    padding: 10px;
+}
+
+#orientacionContent{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#legend{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.shipButton{
+    padding: 7px 15px;
+    font-size: 18px;
 }
