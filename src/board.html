@@ -7,20 +7,35 @@
     <script src="board.js" defer></script>
 </head>
 <body>
-    <button id="newGame" disabled>Nuevo juego</button>
-    <main>
+    <header>
         <h2>Battleship</h2>
+    </header>
+    <main>
+        <div id="description">
+            <div id="textBar">
+                <p id="gameStatus">Esperando sus instrucciones capitan</p>
+            </div>
+            <button id="newGame" disabled>Nuevo juego</button>
+        </div>
         <div id="boardsContainer">
-            <div id="currentBoard"></div>
-            <div id="enemyBoard"></div>
+            <div id="currentContainer">
+                <p>Tus tablero</p>
+                <div id="currentBoard"></div>
+            </div>
+            <div id="enemyContainer">
+                <p>Tablero del enemigo</p>
+                <div id="enemyBoard"></div>
+            </div>
         </div>
     </main>
-    <footer>Hola</footer>
+    <footer><p>Creado por <img src="" alt=""><a href="">Kopolo435</a></p></footer>
     <div id="curtain">
-        <h2>Pagina de preparacion para: <span id="playerName"></span></h2>
-        <p>Asegurate que tu contrincante no pueda ver en estos momentos</p>
-        <p>Al hace click en el boton pasaras a colocar tus barcos</p>
-        <button id="ready">Estoy preparado</button>
+        <div id="curtainContent">
+            <h2>Pagina de preparacion para: <span id="playerName"></span></h2>
+            <p>Asegurate que tu contrincante no pueda ver en estos momentos</p>
+            <p>Al hace click en el boton pasaras a colocar tus barcos</p>
+            <button id="ready">Estoy preparado</button>
+        </div>
     </div>
 </body>
 </html>

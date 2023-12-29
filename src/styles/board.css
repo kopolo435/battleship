@@ -1,17 +1,45 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 body{
     display: flex;
     flex-direction: column;
     margin: 0px;
-    height: 100vh;
     position: relative;
+    height: 100vh;
 }
 
 main{
     position: relative;
-    height: 100vh;
+    height: fit-content;
     display: none;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+#description{
+    margin-top: 15px;
+    align-self: center;
+    display: flex;
+}
+
+#textBar{
+    width: 50vw;
+    height: 10vh;
+    background-color: black;
+    color: white;
 }
 
 #curtain{
@@ -21,22 +49,44 @@ main{
     height: 100%;
     width: 100%;
     overflow: hidden;
-    transition: height 0s  ease-in-out;
+    transition: height 0.5s  ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #curtain.closed{
     height: 0px;
 }
 
+#curtainContent{
+    background-color: gray;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#ready{
+    align-self: center;
+    border-radius: 10px;
+    padding: 7px 15px;
+}
+
 #boardsContainer{
     display: flex;
+    flex: 1;
     gap: 20px;
     justify-content: space-around;
+    flex-wrap: wrap-reverse;
+    align-items: center;
 }
 
 #currentBoard,#enemyBoard{
-    width: 45vw;
-    height: 80vh;
+    width: 400px;
+    height: 400px;
     background-color: black;
     border: 5px solid black;
     display: grid;
@@ -66,4 +116,27 @@ main{
 
 .hover.invalid{
     background-color: red;
+}
+
+footer{
+    box-sizing: border-box;
+    background-color: gray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5px 10px;
+}
+
+@media (max-width:850px) {
+    body{
+        height: fit-content;
+    }
+
+    #curtain{
+        align-items: flex-start;
+    }
+
+    #curtainContent{
+        margin-top: 30vh;
+    }
 }
