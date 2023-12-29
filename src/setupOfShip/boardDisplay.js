@@ -25,7 +25,7 @@ function fillGrid(rowSize, documentObj) {
 
 function shipSelect(event) {
   const { length } = event.target.closest("[data-length]").dataset;
-  const { id } = event.target;
+  const { id } = event.target.closest("[data-length]");
   sessionStorage.setItem("shipLength", `${length}`);
   sessionStorage.setItem("shipId", `${id}`);
 }
