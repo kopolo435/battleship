@@ -8,6 +8,7 @@ import {
   validateAllShipsReady,
   changeButtonStatus,
   setCurtainName,
+  removeSelected,
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
@@ -46,6 +47,7 @@ function onCellClick(event) {
       const shipId = sessionStorage.getItem("shipId");
       ships.set(shipId, ship);
       disableShipBtn(shipId);
+      removeSelected();
       validateAllShipsReady();
       changeCellToShip(ship.getPositions(), cellMap);
       sessionStorage.removeItem("shipLength");
@@ -87,6 +89,12 @@ function onCellHover(event) {
       }
     });
   }
+}
+
+function removeHover() {
+  cellMap.forEach((cell) => {
+    cell.classList.remove("hover", "valid", "invalid");
+  });
 }
 
 function checkIfComputer() {
@@ -141,6 +149,7 @@ readyBtn.addEventListener("click", () => {
 });
 
 restBtn.addEventListener("click", resetBoard);
+board.addEventListener("mouseout", removeHover);
 
 nextBtn.addEventListener("click", () => {
   gameboard.setShips(ships);
