@@ -51,9 +51,10 @@ export default class Gameboard {
     });
     if (hitStatus) {
       this.cells.set(coordinate, "hit");
-    } else {
-      this.cells.set(coordinate, "miss");
+      return true;
     }
+    this.cells.set(coordinate, "miss");
+    return false;
   }
 
   allShipsSunk() {

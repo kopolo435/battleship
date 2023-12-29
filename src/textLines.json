@@ -1,0 +1,8 @@
+{
+    "atckExitoso":"El ataque fue exitoso capitan",
+    "atckFallido":"El ataque fue fallido capitan",
+    "atckExitosoNext":"Capitan! El enemigo realizo un ataque exitoso en uno de nuestros barcos. Esperando sus nuevas instrucciones capitan",
+    "atckFallidoNext":"Capitan el enemigo realizo un ataque, pero no le dio a ninguna de nuestros barcos. Esperando sus instrucciones capitan",
+    "winner":"logro destruir todos los barcos de",
+    "wrongCell": "Capitan, ya ha realizado un ataque en esa posición, escoja otra celda para atacar"
+}

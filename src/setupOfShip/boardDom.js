@@ -106,4 +106,32 @@ function finalBoard(gameboard, isWinner) {
   }
 }
 
-export { showCurtain, hideCurtain, fillBoard, finalBoard, addCellsHoverEvent };
+function showMessage(message) {
+  const gameStatus = document.getElementById("gameStatus");
+  gameStatus.textContent = "";
+  let index = 0;
+  const typingEffect = setInterval(() => {
+    // Check if all characters have been displayed
+    if (index <= message.length) {
+      gameStatus.textContent = message.substring(0, index);
+      index += 1;
+    } else {
+      clearInterval(typingEffect); // Stop the interval when done
+    }
+  }, 50); // Adjust the delay (in milliseconds) between each character
+}
+
+function setCurtainName(name) {
+  const curtainName = document.getElementById("playerName");
+  curtainName.textContent = name;
+}
+
+export {
+  showCurtain,
+  hideCurtain,
+  fillBoard,
+  finalBoard,
+  addCellsHoverEvent,
+  showMessage,
+  setCurtainName,
+};
