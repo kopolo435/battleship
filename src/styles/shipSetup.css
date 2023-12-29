@@ -176,3 +176,7 @@ footer{
     justify-content: center;
     padding: 10px;
 }
+
+.selected{
+    border: 3px solid black;
+}

@@ -30,13 +30,24 @@ function shipSelect(event) {
   sessionStorage.setItem("shipId", `${id}`);
 }
 
+function removeSelected() {
+  const buttons = Array.from(document.querySelectorAll(".shipButton"));
+  buttons.forEach((button) => {
+    button.classList.remove("selected");
+  });
+}
+
+function changeSelectedButton(button) {
+  removeSelected();
+  button.classList.add("selected");
+}
+
 function addShipSelection() {
-  const buttons = Array.from(
-    document.getElementById("shipList").querySelectorAll("button")
-  );
+  const buttons = Array.from(document.querySelectorAll(".shipButton"));
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
       shipSelect(e);
+      changeSelectedButton(button);
     });
   });
 }
@@ -53,14 +64,30 @@ function changeCellToShip(coordinates, cellMap) {
   });
 }
 
+function disableClassButtons(shipClass) {
+  const nodeList = document.querySelectorAll(`.${shipClass}`);
+  const buttons = Array.from(nodeList);
+  buttons[1].disabled = true;
+  buttons[0].disabled = true;
+}
+
 function disableShipBtn(id) {
   const button = document.getElementById(id);
-  button.disabled = true;
+  if (button.classList.contains("carrier")) {
+    disableClassButtons("carrier");
+  } else if (button.classList.contains("battleship")) {
+    disableClassButtons("battleship");
+  } else if (button.classList.contains("submarine")) {
+    disableClassButtons("submarine");
+  } else if (button.classList.contains("lightCruiser")) {
+    disableClassButtons("lightCruiser");
+  } else if (button.classList.contains("heavyCruiser")) {
+    disableClassButtons("heavyCruiser");
+  }
 }
 
 function validateAllShipsReady() {
-  const shipBtnContainer = document.getElementById("shipList");
-  const shipButtons = shipBtnContainer.querySelectorAll("button");
+  const shipButtons = document.querySelectorAll("shipButton");
   if (Array.from(shipButtons).every((button) => button.disabled)) {
     const nextBtn = document.getElementById("next");
     nextBtn.disabled = false;
@@ -68,8 +95,7 @@ function validateAllShipsReady() {
 }
 
 function changeButtonStatus() {
-  const shipBtnContainer = document.getElementById("shipList");
-  const shipButtons = shipBtnContainer.querySelectorAll("button");
+  const shipButtons = document.querySelectorAll(".shipButton");
   const nextBtn = document.getElementById("next");
   nextBtn.disabled = true;
   Array.from(shipButtons).forEach((button) => {
@@ -94,4 +120,5 @@ export {
   validateAllShipsReady,
   changeButtonStatus,
   setCurtainName,
+  removeSelected,
 };
