@@ -78,7 +78,7 @@ async function turnLoops(initialPlayer, secondPlayer) {
     let attack;
     if (currentPlayer.getIsComputer()) {
       if (currentPlayer.getIsComputer() && enemy.getIsComputer()) {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1500));
       }
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
     } else {
