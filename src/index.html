@@ -9,28 +9,33 @@
 <body>
     <header><h1>Battleship</h1></header>
     <main>
-        <form action="" id="nameForm">
-            <div id="player1Name">
-                <div class="sideLabel">
-                    <label for="player1">Player 1</label>
-                    <input  id="player1" type="text" placeholder="player1">
+        <div id="menuContainer">
+            <p id="title">Elije el nombre de los jugadores</p>
+            <form action="" id="nameForm">
+                <div class="playerContainer">
+                    <div class="topLabel">
+                        <label for="player1">Player 1</label>
+                        <input  id="player1" type="text" placeholder="player1">
+                    </div>
+                    <div class="sideLabel">
+                        <input type="checkbox" name="player1Ia" id="player1Ia">
+                        <label for="player1Ia">La computadora lo controla</label>
+                    </div>
                 </div>
-                <div class="sideLabel">
-                    <label for="player1Ia">La computadora lo controla</label>
-                    <input type="checkbox" name="player1Ia" id="player1Ia">
+                <div class="playerContainer">
+                    <div class="topLabel">
+                        <label for="player2">Player 2</label>
+                        <input  class="checkSelect" id="player2" type="text" placeholder="player1">
+                    </div>
+                    <div class="sideLabel">
+                        <input class="checkSelect" type="checkbox" name="player2IA" id="player2Ia">
+                        <label for="player2Ia">La computadora lo controla</label>
+                    </div>
                 </div>
-            </div>
-            <div id="player2Name">
-                <div class="sideLabel">
-                    <label for="player2">Player 2</label>
-                    <input  id="player2" type="text" placeholder="player1">
-                </div>
-                <div class="sideLabel">
-                    <label for="player2Ia">La computadora lo controla</label>
-                    <input type="checkbox" name="player2IA" id="player2Ia">
-                </div>
-            <a href="shipSetup.html" id="start">Empezar</a>
-        </form>
+            </form>
+            <button id="start">Empezar</button>
+        </div>
     </main>
+    <footer><p>Creado por <img src="" alt=""><a href="">Kopolo435</a></p></footer>
 </body>
 </html>

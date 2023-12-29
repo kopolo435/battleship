@@ -1,3 +1,5 @@
+import style from "./styles/index.css";
+
 const startLink = document.getElementById("start");
 
 function setPlayersInfo(player) {
