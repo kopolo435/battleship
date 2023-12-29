@@ -9,6 +9,8 @@ import {
   changeButtonStatus,
   setCurtainName,
   removeSelected,
+  hideError,
+  showError,
 } from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
@@ -50,9 +52,11 @@ function onCellClick(event) {
       removeSelected();
       validateAllShipsReady();
       changeCellToShip(ship.getPositions(), cellMap);
+      hideError();
       sessionStorage.removeItem("shipLength");
     } else {
       console.log("Elija otra posicion para el barco");
+      showError();
     }
   } else {
     console.log("Debe escoger un barco primero");

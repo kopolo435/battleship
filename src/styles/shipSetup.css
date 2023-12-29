@@ -17,6 +17,7 @@ header{
     align-items: center;
     gap: 10px;
     margin-top: 10px;
+    padding: 0px 10px;
 }
 
 main{
@@ -51,12 +52,16 @@ main{
     padding: 20px;
     border-radius: 10px;
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
 }
 
 #ready{
     border-radius: 10px;
     padding: 7px 15px;
+    align-self: center;
 }
 
 #shipList{
@@ -154,7 +159,7 @@ main{
     display: none;
 }
 
-.showError{
+#errorMessage.showError{
     display: block;
 }
 

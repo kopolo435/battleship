@@ -105,10 +105,22 @@ function changeButtonStatus() {
 
 function setCurtainName() {
   const playerName = document.getElementById("playerName");
+  const pageName = document.getElementById("name");
   const player = JSON.parse(
     sessionStorage.getItem(sessionStorage.getItem("current"))
   );
   playerName.textContent = player.name;
+  pageName.textContent = player.name;
+}
+
+function showError() {
+  const error = document.getElementById("errorMessage");
+  error.classList.add("showError");
+}
+
+function hideError() {
+  const error = document.getElementById("errorMessage");
+  error.classList.remove("showError");
 }
 
 export {
@@ -121,4 +133,6 @@ export {
   changeButtonStatus,
   setCurtainName,
   removeSelected,
+  showError,
+  hideError,
 };
