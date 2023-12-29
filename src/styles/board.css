@@ -9,6 +9,7 @@ body{
     margin: 0px;
     position: relative;
     height: 100vh;
+    gap: 20px;
 }
 
 main{
@@ -19,6 +20,7 @@ main{
     flex-direction: column;
     justify-content: center;
     flex: 1;
+    gap: 20px;
 }
 
 header{
@@ -33,6 +35,12 @@ header{
     margin-top: 15px;
     align-self: center;
     display: flex;
+    gap: 20px;
+}
+
+#newGame{
+    align-self: center;
+    padding: 7px 15px;
 }
 
 #textBar{
@@ -40,6 +48,7 @@ header{
     height: 10vh;
     background-color: black;
     color: white;
+    padding: 10px;
 }
 
 #curtain{
@@ -49,7 +58,7 @@ header{
     height: 100%;
     width: 100%;
     overflow: hidden;
-    transition: height 0.5s  ease-in-out;
+    transition: height 0s  ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,7 +136,7 @@ footer{
     padding: 5px 10px;
 }
 
-@media (max-width:850px) {
+@media (max-width:840px) {
     body{
         height: fit-content;
     }
@@ -138,5 +147,25 @@ footer{
 
     #curtainContent{
         margin-top: 30vh;
+    }
+
+    #description{
+        flex-direction: column;
+    }
+
+    #textBar{
+        width: 80vw;
+    }
+
+    #newGame{
+        align-self: flex-end;
+    }
+
+}
+
+@media (max-width:500px){
+    #currentBoard,#enemyBoard{
+        width: 90vw;
+        height: 90vw;
     }
 }
