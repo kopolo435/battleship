@@ -7,10 +7,14 @@
     <script src="shipSetup.js" defer></script>
 </head>
 <body>
-    <header><h2>Battleship</h2></header>
+    <header>
+        <h2>Battleship</h2>
+        <div id="description">
+            <p id="title">Coloque sus barcos capitan<span id="name"></span></p>
+            <p id="errorMessage">Intente colocar el barco en otra posicion</p>
+        </div>
+    </header>
     <main>
-        <p id="title"><span id="name"></span> coloque sus barcos</p>
-        <p id="errorMessage">Intente colocar el barco en otra posicion</p>
         <div id="mobileMenu"></div>
         <div id="shipSetup">
             <div id="boardContainer">
@@ -36,11 +40,36 @@
                         </div>
                     </fieldset>
                     <div id="shipList">
-                        <button  class="shipButton" id="carrier" data-length="6">Carrier</button>
-                        <button class="shipButton" id="battleship" data-length="5">Battleship</button>
-                        <button class="shipButton" id="submarine" data-length="4">Submarine</button>
-                        <button class="shipButton" id="destroyer1" data-length="2">Destroyer</button>
-                        <button class="shipButton" id="destroyer2" data-length="2">Destroyer</button>
+                        <button  class="shipButton" id="carrier" data-length="6">
+                            <div class="shipInfo">
+                                <p>Carrier</p>
+                                <p>6 de longitud</p>
+                            </div>
+                        </button>
+                        <button class="shipButton" id="battleship" data-length="5">
+                            <div class="shipInfo">
+                                <p>Battleship</p>
+                                <p>5 de longitud</p>
+                            </div>
+                        </button>
+                        <button class="shipButton" id="submarine" data-length="4">
+                            <div class="shipInfo">
+                                <p>Submarino</p>
+                                <p>4 de longitud</p>
+                            </div>
+                        </button>
+                        <button class="shipButton" id="destroyer1" data-length="2">
+                            <div class="shipInfo">
+                                <p>Heavy Cruiser</p>
+                                <p>2 de longitud</p>
+                            </div>
+                        </button>
+                        <button class="shipButton" id="destroyer2" data-length="2">
+                            <div class="shipInfo">
+                                <p>Light Cruiser</p>
+                                <p>2 de longitud</p>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </aside>
