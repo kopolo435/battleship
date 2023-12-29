@@ -6,12 +6,32 @@ import style from "./styles/board.css";
 import textLines from "./textLines.json";
 
 let enemyMap = new Map();
+let typingEffect = null; // Global variable to hold the intervals
 function updateEnemyMap(gameboard) {
   const replaceMap = new Map();
   gameboard.forEach((value, index) => {
     replaceMap.set(index, value);
   });
   enemyMap = replaceMap;
+}
+
+function showMessage(message) {
+  const gameStatus = document.getElementById("gameStatus");
+  if (typingEffect) {
+    clearInterval(typingEffect); // Clear the interval if already running
+  }
+  gameStatus.textContent = "";
+  let index = 0;
+  typingEffect = setInterval(() => {
+    // Check if all characters have been displayed
+    if (index <= message.length) {
+      gameStatus.textContent = message.substring(0, index);
+      index += 1;
+    } else {
+      clearInterval(typingEffect); // Stop the interval when done
+      typingEffect = null; // Reset the typingEffect variable
+    }
+  }, 50); // Adjust the delay (in milliseconds) between each character
 }
 
 function createCellAttackEvent(resolve) {
@@ -24,7 +44,7 @@ function createCellAttackEvent(resolve) {
         enemyMap.get(coordinate) === "hit" ||
         enemyMap.get(coordinate) === "miss"
       ) {
-        display.showMessage(textLines.wrongCell);
+        showMessage(textLines.wrongCell);
       } else {
         resolve(coordinate);
       }
@@ -43,9 +63,9 @@ async function turnLoops(initialPlayer, secondPlayer) {
   let status;
   while (!enemy.getGameboard().allShipsSunk()) {
     if (status) {
-      display.showMessage(textLines.atckExitosoNext);
+      showMessage(textLines.atckExitosoNext);
     } else if (status === false) {
-      display.showMessage(textLines.atckFallidoNext);
+      showMessage(textLines.atckFallidoNext);
     }
     if (!currentPlayer.getIsComputer() && !enemy.getIsComputer()) {
       display.setCurtainName(currentPlayer.name);
@@ -58,7 +78,7 @@ async function turnLoops(initialPlayer, secondPlayer) {
     let attack;
     if (currentPlayer.getIsComputer()) {
       if (currentPlayer.getIsComputer() && enemy.getIsComputer()) {
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
       attack = currentPlayer.getComputerPlay(enemy.getGameboard().getCells());
     } else {
@@ -66,9 +86,9 @@ async function turnLoops(initialPlayer, secondPlayer) {
     }
     status = enemy.getGameboard().receiveAttack(attack);
     if (status) {
-      display.showMessage(textLines.atckExitoso);
+      showMessage(textLines.atckExitoso);
     } else {
-      display.showMessage(textLines.atckFallido);
+      showMessage(textLines.atckFallido);
     }
     display.fillBoard(enemy.getGameboard().getCells(), false);
     updateEnemyMap(enemy.getGameboard().getCells());
@@ -124,7 +144,7 @@ function startNewGame() {
 
 function setWinner(winner, player1, player2) {
   if (winner === player1.name) {
-    display.showMessage(`${player1.name} ${textLines.winner} ${player2}`);
+    showMessage(`${player1.name} ${textLines.winner} ${player2}`);
     if (player1.getIsComputer()) {
       display.finalBoard(player2.getGameboard().getCells(), true);
       display.finalBoard(player1.getGameboard().getCells(), false);
@@ -133,7 +153,7 @@ function setWinner(winner, player1, player2) {
       display.finalBoard(player2.getGameboard().getCells(), false);
     }
   } else {
-    display.showMessage(`${player2.name} ${textLines.winner} ${player1}`);
+    showMessage(`${player2.name} ${textLines.winner} ${player1}`);
     if (player2.getIsComputer()) {
       display.finalBoard(player1.getGameboard().getCells(), true);
       display.finalBoard(player2.getGameboard().getCells(), false);
