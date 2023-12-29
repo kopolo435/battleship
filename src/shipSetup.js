@@ -57,7 +57,7 @@ function onCellClick(event) {
     } else {
       showError("Elija otra posicion para el barco");
     }
-  } else {
+  } else if (!validateAllShipsReady) {
     showError("Debe escoger un barco primero");
   }
 }

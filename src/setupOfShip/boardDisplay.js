@@ -91,7 +91,9 @@ function validateAllShipsReady() {
   if (Array.from(shipButtons).every((button) => button.disabled)) {
     const nextBtn = document.getElementById("next");
     nextBtn.disabled = false;
+    return true;
   }
+  return false;
 }
 
 function changeButtonStatus() {
