@@ -1,4 +1,4 @@
-import style from "./shipSetup.css";
+import style from "./styles/shipSetup.css";
 import {
   fillGrid,
   addShipSelection,
@@ -114,20 +114,26 @@ function resetBoard() {
 
 const readyBtn = document.getElementById("ready");
 const board = document.getElementById("board");
-const orientation = document.getElementById("orientation");
 const restBtn = document.getElementById("reset");
 const nextBtn = document.getElementById("next");
 fillGrid(10, board);
 const cellList = board.querySelectorAll(".cell");
 
+const verticalRadio = document.getElementById("vertical");
+const horizontalRadio = document.getElementById("horizontal");
+
+horizontalRadio.addEventListener("change", () => {
+  sessionStorage.setItem("shipOrientation", "horizontal");
+});
+
+verticalRadio.addEventListener("change", () => {
+  sessionStorage.setItem("shipOrientation", "vertical");
+});
+
 Array.from(cellList).forEach((cell) => {
   cell.addEventListener("click", onCellClick);
   cell.addEventListener("mouseover", onCellHover);
   cellMap.set(cell.dataset.id, cell);
-});
-
-orientation.addEventListener("change", () => {
-  sessionStorage.setItem("shipOrientation", orientation.value);
 });
 
 readyBtn.addEventListener("click", () => {
@@ -147,6 +153,6 @@ addShipSelection();
 sessionStorage.setItem("current", sessionStorage.getItem("setup"));
 setCurtainName();
 setNextPage(sessionStorage.getItem("current"));
-sessionStorage.setItem("shipOrientation", orientation.value);
+sessionStorage.setItem("shipOrientation", "horizontal");
 sessionStorage.removeItem("shipLength");
 checkIfComputer();
