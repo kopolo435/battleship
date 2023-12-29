@@ -13,10 +13,20 @@ body{
     height: 100vh;
     align-items: center;
     gap: 20px;
+    background-color: #6f8695;
 }
 
 header{
-    margin-top: 2vh;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: #cbcbd4;
+    border-bottom: 4px solid #d4af37;;
+}
+
+h1{
+    font-weight: 600;
+    color: #061e45;
 }
 
 main{
@@ -28,21 +38,40 @@ main{
 }
 
 #menuContainer{
-    background-color: gray;
-    padding: 5vh 6vw;
+    background-color: #cbcbd4;
+    padding: 3vh 4vw;
     border-radius: 20px;
     border: none;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
     align-items: center;
     margin: 0px 5vw;
+    color: #05204a;
+    font-weight: 600;
+    box-shadow: 25px 17px 14px -7px rgba(0,0,0,0.68);
+    -webkit-box-shadow: 25px 17px 14px -7px rgba(0,0,0,0.68);
+    -moz-box-shadow: 25px 17px 14px -7px rgba(0,0,0,0.68);
 }
 
 #start{
     align-self: flex-end;
+    background-color: #05204a;
+    color: #cbcbd4;
     padding: 7px 15px;
     border-radius: 10px;
+    border: none;
+    box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+    -webkit-box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+    -moz-box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+}
+
+#start:active{
+    outline: 4px solid #d4af37;
+}
+
+#start:focus-visible{
+    outline-color: #151e3f;
 }
 
 #nameForm{
@@ -51,6 +80,10 @@ main{
     flex-wrap: wrap;
     gap: 10vw;
 
+}
+
+input:focus-visible{
+    outline-color: #151e3f;
 }
 
 .playerContainer{
@@ -72,11 +105,12 @@ main{
 
 footer{
     box-sizing: border-box;
-    background-color: gray;
+    background-color: #cbcbd4;;
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 10px;
+    border-top: 4px solid #d4af37;
 }
 
 @media (max-width: 728px) {
