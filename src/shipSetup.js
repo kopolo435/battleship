@@ -6,7 +6,7 @@ import {
   changeCellToShip,
   disableShipBtn,
   validateAllShipsReady,
-  changeButtonStatus,
+  resetButtonsStatus,
   setCurtainName,
   removeSelected,
   hideError,
@@ -120,7 +120,7 @@ function resetBoard() {
   cellMap.forEach((cell) => {
     cell.classList.remove("ship");
   });
-  changeButtonStatus();
+  resetButtonsStatus();
 }
 
 const readyBtn = document.getElementById("ready");
