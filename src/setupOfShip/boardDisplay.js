@@ -206,6 +206,13 @@ function hideError() {
   error.classList.remove("showError");
 }
 
+function onShipAdded(shipId) {
+  disableShipBtn(shipId);
+  removeSelected();
+  validateAllShipsReady();
+  hideError();
+}
+
 export {
   fillGrid,
   addShipSelection,
@@ -218,4 +225,5 @@ export {
   removeSelected,
   showError,
   hideError,
+  onShipAdded,
 };

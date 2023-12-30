@@ -1,27 +1,23 @@
 import style from "./styles/shipSetup.css";
-import {
-  fillGrid,
-  addShipSelection,
-  displayChangeOnReady,
-  changeCellToShip,
-  disableShipBtn,
-  validateAllShipsReady,
-  resetButtonsStatus,
-  setCurtainName,
-  removeSelected,
-  hideError,
-  showError,
-} from "./setupOfShip/boardDisplay";
+import * as display from "./setupOfShip/boardDisplay";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
 import { replacer } from "./jsonConversion";
 import computerPositions from "./setupOfShip/autoShipPosition";
 
-let gameboard = new Gameboard();
-let ships = new Map();
-let nextPageLink = "";
-const cellMap = new Map();
+let gameboard = new Gameboard(); // Se almacena en sessionStorage al avanzar de pagina
+let ships = new Map(); // Almacena las ships agregadas, es una variable innecesaria
+// debido a que los ships se almacenan en gameboard y este se reinicial al hacer un reset
 
+let nextPageLink = ""; // Cambia dependiendo de si currentPlayer es player1 o player2
+const cellMap = new Map(); // Map que almacena las cells del html. "[2,4]"=> divElement
+
+/**
+ * Almacena en setup "player2" indicando que la proxima ves que se
+ * cargue la pagina al avanzar, la colocacion de ships sera para player2
+ * En caso de player ser player2 entonces al avanzar se ira a la pagina de juego
+ * @param {string} player Indica si es player1 o player2
+ */
 function setNextPage(player) {
   if (player === "player1") {
     sessionStorage.setItem("setup", "player2");
@@ -31,6 +27,11 @@ function setNextPage(player) {
   }
 }
 
+/**
+ * Crea un ship en el gameboard, en caso de
+ * @param {string} coordinate formato "[2,4]"
+ * @returns Ship obj si fue agregada exitosamente al gameboard, null en caso contrario
+ */
 function createShip(coordinate) {
   const length = sessionStorage.getItem("shipLength");
   const orientation = sessionStorage.getItem("shipOrientation");
@@ -41,6 +42,11 @@ function createShip(coordinate) {
   return null;
 }
 
+/**
+ * Define el evento que ocurre despues de que se hace click a una celda
+ * para añadir un barco
+ * @param {Event} event evento click de la celda donde se coloco el barco
+ */
 function onCellClick(event) {
   const coordinate = event.target.dataset.id;
   if (sessionStorage.getItem("shipLength") !== null) {
@@ -48,19 +54,23 @@ function onCellClick(event) {
     if (ship) {
       const shipId = sessionStorage.getItem("shipId");
       ships.set(shipId, ship);
-      disableShipBtn(shipId);
-      removeSelected();
-      validateAllShipsReady();
-      changeCellToShip(ship.getPositions(), cellMap);
-      hideError();
+      display.onShipAdded(shipId);
+      display.changeCellToShip(ship.getPositions(), cellMap);
       sessionStorage.removeItem("shipLength");
     } else {
-      showError("Elija otra posicion para el barco");
+      display.showError("Elija otra posicion para el barco");
     }
-  } else if (!validateAllShipsReady) {
-    showError("Debe escoger un barco primero");
+  } else if (!display.validateAllShipsReady) {
+    display.showError("Debe escoger un barco primero");
   }
 }
+
+/**
+ * Comprueba si en la coordenada indicada se puede colocar el
+ * barco seleccionado
+ * @param {string} coordinate formato "[2,4]"
+ * @returns objeto {possibleShip: Ship obj , status: boolean}
+ */
 function checkPosition(coordinate) {
   const length = sessionStorage.getItem("shipLength");
   const orientation = sessionStorage.getItem("shipOrientation");
@@ -71,6 +81,12 @@ function checkPosition(coordinate) {
   return { possibleShip, status: false };
 }
 
+/**
+ * Elimina cualquier clase de hover activa en las cells, luego agrega
+ * las clases de hover correspondiente a las posiciones que tenga la ship
+ * conseguida al comprobar la posicion
+ * @param {Event} event evento que indica en que cell se hizo hover
+ */
 function onCellHover(event) {
   const coordinate = event.target.dataset.id;
   const possibleShip = checkPosition(coordinate);
@@ -94,12 +110,19 @@ function onCellHover(event) {
   }
 }
 
+/**
+ * Elimina el hover de todas las cells
+ */
 function removeHover() {
   cellMap.forEach((cell) => {
     cell.classList.remove("hover", "valid", "invalid");
   });
 }
 
+/**
+ * Comprueba si el current player es la computadora, en cuyo caso
+ * el gameboard se crea automaticamente
+ */
 function checkIfComputer() {
   const current = sessionStorage.getItem("current");
   const { isComputer } = JSON.parse(sessionStorage.getItem(current));
@@ -114,20 +137,24 @@ function checkIfComputer() {
   }
 }
 
+/**
+ * Se encarga de hacer un reset a la pagina para poder volver a colocar
+ * los barcos desde cero
+ */
 function resetBoard() {
   ships = new Map();
   gameboard = new Gameboard();
   cellMap.forEach((cell) => {
     cell.classList.remove("ship");
   });
-  resetButtonsStatus();
+  display.resetButtonsStatus();
 }
 
 const readyBtn = document.getElementById("ready");
 const board = document.getElementById("board");
 const restBtn = document.getElementById("reset");
 const nextBtn = document.getElementById("next");
-fillGrid(10, board);
+display.fillGrid(10, board);
 const cellList = board.querySelectorAll(".cell");
 
 const verticalRadio = document.getElementById("vertical");
@@ -161,7 +188,7 @@ Array.from(cellList).forEach((cell) => {
 });
 
 readyBtn.addEventListener("click", () => {
-  displayChangeOnReady();
+  display.displayChangeOnReady();
 });
 
 restBtn.addEventListener("click", resetBoard);
@@ -174,9 +201,9 @@ nextBtn.addEventListener("click", () => {
   sessionStorage.setItem(`${currentPlayer}Gameboard`, jsonText);
   window.location.href = nextPageLink;
 });
-addShipSelection();
+display.addShipSelection();
 sessionStorage.setItem("current", sessionStorage.getItem("setup"));
-setCurtainName();
+display.setCurtainName();
 setNextPage(sessionStorage.getItem("current"));
 sessionStorage.setItem("shipOrientation", "horizontal");
 sessionStorage.removeItem("shipLength");

@@ -103,7 +103,7 @@ function fillBoard(gameboardCells, showShips) {
     for (let y = 10 - 1; y >= 0; y -= 1) {
       for (let x = 0; x < 10; x += 1) {
         const coordinate = `[${x},${y}]`;
-        const value = gameboard.get(coordinate);
+        const value = gameboardCells.get(coordinate);
         if (value === "ship") {
           enemyBoard.appendChild(createCell(coordinate, "empty"));
         } else {
