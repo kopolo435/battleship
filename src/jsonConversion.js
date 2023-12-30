@@ -1,6 +1,16 @@
+/**
+ * Crea helper functions que seran usadas para convertir objetos en JSOn
+ * asi como transformalos de vuelta a objetos de javascript
+ */
+
 import Ship from "./ship";
 import Gameboard from "./gameboard";
 
+/**
+ *
+ * @param {Map} positions ship Positions
+ * @returns array de objetos mapeados como las posiciones del map
+ */
 function mapReplacer(positions) {
   const positionsArray = [];
   positions.forEach((value, key) => {
@@ -9,6 +19,9 @@ function mapReplacer(positions) {
   return positionsArray;
 }
 
+/**
+ * Se encarga de revivir un ship almacenado en el JSON
+ */
 function parseShip(jsonValue) {
   const { hits } = jsonValue;
   const { positions } = jsonValue;
@@ -22,6 +35,11 @@ function parseShip(jsonValue) {
   return convertedShip;
 }
 
+/**
+ * Se encarga de revivir un Gameboard object
+ * @param {JSON} jsonValue json object
+ * @returns
+ */
 function parseGameboard(jsonValue) {
   const { cells } = jsonValue;
   const { ships } = jsonValue;
@@ -35,6 +53,13 @@ function parseGameboard(jsonValue) {
   return replacerGameboard;
 }
 
+/**
+ * Se encarga de reemplazar los objetos especiales, por objetos que json
+ * pueda manejar
+ * @param {*} key
+ * @param {*} value Ship | Gameboard | Map
+ * @returns
+ */
 function replacer(key, value) {
   if (value instanceof Ship) {
     return {
@@ -49,6 +74,12 @@ function replacer(key, value) {
   return value;
 }
 
+/**
+ * Se encarga de revivir los diversos objetos que se le pasen
+ * @param {*} key
+ * @param {*} value
+ * @returns
+ */
 function reviver(key, value) {
   if (typeof value === "object" && value !== null) {
     if (value.datatype === "Ship") {
