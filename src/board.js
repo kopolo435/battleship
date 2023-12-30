@@ -144,7 +144,7 @@ function startNewGame() {
 
 function setWinner(winner, player1, player2) {
   if (winner === player1.name) {
-    showMessage(`${player1.name} ${textLines.winner} ${player2}`);
+    showMessage(`${player1.name} ${textLines.winner} ${player2.name}`);
     if (player1.getIsComputer()) {
       display.finalBoard(player2.getGameboard().getCells(), true);
       display.finalBoard(player1.getGameboard().getCells(), false);
@@ -153,7 +153,7 @@ function setWinner(winner, player1, player2) {
       display.finalBoard(player2.getGameboard().getCells(), false);
     }
   } else {
-    showMessage(`${player2.name} ${textLines.winner} ${player1}`);
+    showMessage(`${player2.name} ${textLines.winner} ${player1.name}`);
     if (player2.getIsComputer()) {
       display.finalBoard(player1.getGameboard().getCells(), true);
       display.finalBoard(player2.getGameboard().getCells(), false);

@@ -15,8 +15,24 @@
         </div>
     </header>
     <main>
+        <p id="mobileText">Seleccione y coloque los 5 barcos</p>
+        <fieldset id="orientacionContainerM">
+            <p id="legendM">Orientacion</p>
+            <div>
+                <div id="orientacionContentM">
+                    <div class="sideLabel">
+                        <input type="radio" name="orientacionM" id="verticalM">
+                        <label for="verticalM">Vertical</label>
+                    </div>
+                    <div class="sideLabel">
+                        <input type="radio" name="orientacionM" id="horizontalM" checked>
+                        <label for="horizontalM">Horizontal</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
         <div id="mobileMenu">
-            <button  class="shipButton carrier" id="carrierM" data-length="6">
+            <button  class="shipButton carrier selected" id="carrierM" data-length="6">
                 <div class="shipInfo">
                     <p>Carrier</p>
                     <p>6 de longitud</p>
@@ -53,6 +69,7 @@
             </div>
             <aside id="sideBar">
                 <div id="shipsContainer">
+                    <p id="shipContainerText">Seleccione y coloque los 5 barcos</p>
                     <fieldset id="orientacionContainer">
                         <p id="legend">Orientacion</p>
                         <div>
@@ -69,7 +86,7 @@
                         </div>
                     </fieldset>
                     <div id="shipList">
-                        <button  class="shipButton carrier" id="carrier" data-length="6">
+                        <button  class="shipButton carrier selected" id="carrier" data-length="6">
                             <div class="shipInfo">
                                 <p>Carrier</p>
                                 <p>6 de longitud</p>

@@ -132,12 +132,24 @@ const cellList = board.querySelectorAll(".cell");
 
 const verticalRadio = document.getElementById("vertical");
 const horizontalRadio = document.getElementById("horizontal");
+const horizontalRadioMobile = document.getElementById("horizontalM");
+const verticalRadioMobile = document.getElementById("verticalM");
+const carrierBtn = document.getElementById("carrier");
+const clickEvent = new Event("click");
 
 horizontalRadio.addEventListener("change", () => {
   sessionStorage.setItem("shipOrientation", "horizontal");
 });
 
 verticalRadio.addEventListener("change", () => {
+  sessionStorage.setItem("shipOrientation", "vertical");
+});
+
+horizontalRadioMobile.addEventListener("change", () => {
+  sessionStorage.setItem("shipOrientation", "horizontal");
+});
+
+verticalRadioMobile.addEventListener("change", () => {
   sessionStorage.setItem("shipOrientation", "vertical");
 });
 
@@ -169,3 +181,4 @@ setNextPage(sessionStorage.getItem("current"));
 sessionStorage.setItem("shipOrientation", "horizontal");
 sessionStorage.removeItem("shipLength");
 checkIfComputer();
+carrierBtn.dispatchEvent(clickEvent);

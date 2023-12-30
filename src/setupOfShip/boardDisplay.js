@@ -37,9 +37,35 @@ function removeSelected() {
   });
 }
 
+function getShipClass(button) {
+  if (button.classList.contains("carrier")) {
+    return "carrier";
+  }
+  if (button.classList.contains("battleship")) {
+    return "battleship";
+  }
+  if (button.classList.contains("submarine")) {
+    return "submarine";
+  }
+  if (button.classList.contains("lightCruiser")) {
+    return "lightCruiser";
+  }
+  if (button.classList.contains("heavyCruiser")) {
+    return "heavyCruiser";
+  }
+}
+
+function addSelectedToButtons(button) {
+  const shipClass = getShipClass(button);
+  const nodeList = document.querySelectorAll(`.${shipClass}`);
+  const buttons = Array.from(nodeList);
+  buttons[1].classList.add("selected");
+  buttons[0].classList.add("selected");
+}
+
 function changeSelectedButton(button) {
   removeSelected();
-  button.classList.add("selected");
+  addSelectedToButtons(button);
 }
 
 function addShipSelection() {
@@ -73,17 +99,8 @@ function disableClassButtons(shipClass) {
 
 function disableShipBtn(id) {
   const button = document.getElementById(id);
-  if (button.classList.contains("carrier")) {
-    disableClassButtons("carrier");
-  } else if (button.classList.contains("battleship")) {
-    disableClassButtons("battleship");
-  } else if (button.classList.contains("submarine")) {
-    disableClassButtons("submarine");
-  } else if (button.classList.contains("lightCruiser")) {
-    disableClassButtons("lightCruiser");
-  } else if (button.classList.contains("heavyCruiser")) {
-    disableClassButtons("heavyCruiser");
-  }
+  const shipClass = getShipClass(button);
+  disableClassButtons(shipClass);
 }
 
 function validateAllShipsReady() {
