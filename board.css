@@ -1,0 +1,226 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    position: relative;
+    height: 100vh;
+    background-color: #6f8695;
+}
+
+main{
+    position: relative;
+    height: fit-content;
+    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 10px;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #061e45;
+    padding: 2px;
+    background-color: #cbcbd4;
+}
+
+#description{
+    margin-top: 15px;
+    align-self: center;
+    display: flex;
+    gap: 20px;
+}
+
+#newGame{
+    align-self: center;
+    background-color: #05204a;
+    color: #cbcbd4;
+    padding: 7px 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    border: 2px solid #d4af37;
+    box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+    -webkit-box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+    -moz-box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+}
+
+#newGame:focus-visible{
+    outline: 2px solid #d4af37;
+ }
+ 
+ #newGame:active{
+     border: 4px solid #d4af37;
+ }
+
+#newGame:disabled{
+    background-color: #788791;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+#textBar{
+    width: 50vw;
+    height: 7vh;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+}
+
+#curtain{
+    position: absolute;
+    background-color: #05204a;
+    color: white;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    transition: height 0s  ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#curtain.closed{
+    height: 0px;
+}
+
+#curtainContent{
+    background-color: #cbcbd4;
+    color: #061e45;
+    font-weight: 600;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#ready{
+    align-self: center;
+    background-color: #05204a;
+    color: #cbcbd4;
+    padding: 7px 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    border: none;
+    box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+    -webkit-box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+    -moz-box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+}
+
+#ready:active{
+    outline: 4px solid #d4af37;
+}
+
+#ready:focus-visible{
+    outline-color: #d4af37;
+}
+
+#boardsContainer{
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+}
+
+#currentBoard,#enemyBoard{
+    width: 400px;
+    height: 400px;
+    background-color: black;
+    border: 5px solid #061e45;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    grid-auto-rows: auto;
+    gap: 2px;
+    box-shadow: -31px 9px 57px -11px rgba(0,0,0,0.76);
+    -webkit-box-shadow: -31px 9px 57px -11px rgba(0,0,0,0.76);
+    -moz-box-shadow: -31px 9px 57px -11px rgba(0,0,0,0.76);
+}
+
+.cell{
+    background-color: #c3e3eb;
+}
+
+.cell.ship{
+    background-color:#8b9eb7;
+}
+
+.cell.miss{
+    background-color: yellow;
+}
+
+.cell.hit{
+    background-color: #c41e3a;
+}
+.hover.valid{
+    background-color: #23DC3D;
+}
+
+.hover.invalid{
+    background-color: #ff0f0f;
+}
+
+footer{
+    box-sizing: border-box;
+    background-color: #cbcbd4;
+    color: #061e45 ;
+    font-weight: 600;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-top: 4px solid #d4af37;
+}
+
+@media (max-width:840px) {
+    body{
+        height: fit-content;
+        gap: 10px;
+    }
+
+    #curtain{
+        align-items: flex-start;
+    }
+
+    #curtainContent{
+        margin-top: 30vh;
+    }
+
+    #description{
+        flex-direction: column;
+    }
+
+    #textBar{
+        width: 80vw;
+    }
+
+    #newGame{
+        align-self: flex-end;
+    }
+
+}
+
+@media (max-width:500px){
+    #currentBoard,#enemyBoard{
+        width: 90vw;
+        height: 90vw;
+    }
+
+}
+
+/*# sourceMappingURL=board.css.map*/

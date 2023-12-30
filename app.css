@@ -1,0 +1,127 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+p{
+    margin: 0px;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    gap: 20px;
+    background-color: #6f8695;
+}
+
+header{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: #cbcbd4;
+    border-bottom: 4px solid #d4af37;;
+}
+
+h1{
+    font-weight: 600;
+    color: #061e45;
+}
+
+main{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#menuContainer{
+    background-color: #cbcbd4;
+    padding: 3vh 4vw;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    margin: 0px 5vw;
+    color: #05204a;
+    font-weight: 600;
+    box-shadow: 25px 17px 14px -7px rgba(0,0,0,0.68);
+    -webkit-box-shadow: 25px 17px 14px -7px rgba(0,0,0,0.68);
+    -moz-box-shadow: 25px 17px 14px -7px rgba(0,0,0,0.68);
+}
+
+#start{
+    align-self: flex-end;
+    background-color: #05204a;
+    color: #cbcbd4;
+    padding: 7px 15px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+    -webkit-box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+    -moz-box-shadow: 16px 9px 31px -11px rgba(0,0,0,0.76);
+}
+
+#start:active{
+    outline: 4px solid #d4af37;
+}
+
+#start:focus-visible{
+    outline-color: #151e3f;
+}
+
+#nameForm{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10vw;
+
+}
+
+input:focus-visible{
+    outline-color: #151e3f;
+}
+
+.playerContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nameInput{
+    padding: 2px 4px;
+    border-radius: 5px;
+    border: none;
+}
+.topLabel{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+footer{
+    box-sizing: border-box;
+    background-color: #cbcbd4;;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-top: 4px solid #d4af37;
+}
+
+@media (max-width: 728px) {
+    #nameForm{
+        flex-direction: column;
+        gap: 4vh;
+    }
+
+    #menuContainer{
+        padding: 5vh 6vw ;
+    }
+}
+
+/*# sourceMappingURL=app.css.map*/
