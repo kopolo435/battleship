@@ -87,7 +87,7 @@ function disableShipBtn(id) {
 }
 
 function validateAllShipsReady() {
-  const shipButtons = document.querySelectorAll("shipButton");
+  const shipButtons = document.querySelectorAll(".shipButton");
   if (Array.from(shipButtons).every((button) => button.disabled)) {
     const nextBtn = document.getElementById("next");
     nextBtn.disabled = false;
