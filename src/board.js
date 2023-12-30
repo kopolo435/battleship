@@ -177,11 +177,11 @@ player2.gameboard = player2Gameboard;
 
 const hideCurtainBtn = document.getElementById("ready");
 const newGameBtn = document.getElementById("newGame");
+newGameBtn.addEventListener("click", startNewGame);
 hideCurtainBtn.addEventListener("click", display.hideCurtain);
 const { initialPlayer, secondPlayer } = chooseInitialPlayer(player1, player2);
 checkIfShowCurtain(initialPlayer, secondPlayer);
 const winner = await turnLoops(initialPlayer, secondPlayer);
 setWinner(winner, player1, player2);
 newGameBtn.disabled = false;
-newGameBtn.addEventListener("click", startNewGame);
 console.log(winner);
