@@ -6,6 +6,7 @@ export default class Ship {
     this.hits = 0;
   }
 
+  // Añade las posiciones de un barco al crearse
   #addPositions(coordinate, length, orientation) {
     const [xPosition, yPosition] = extractCoordinates(coordinate);
     const positions = new Map();
@@ -33,6 +34,8 @@ export default class Ship {
     return this.getPositions().length;
   }
 
+  // Registra un hit en la posicion si se encuentra dentro de
+  // las posiciones de ship
   hit(coordinate) {
     if (
       this.positions.get(coordinate) !== undefined &&

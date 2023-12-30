@@ -20,10 +20,16 @@ export default class Player {
     return this.gameboard;
   }
 
-  #getPosibilities(enemyBoard) {
+  /**
+   *Comprueba que cells del enemigo pueden ser atacadas
+   * @param {Map} enemyCells
+   * @returns Objeto con las cells disponibles para atacar y aquellas
+   * ya atacadas exitosamente
+   */
+  #getPosibilities(enemyCells) {
     const possibleCells = [];
     const hitCells = [];
-    enemyBoard.forEach((content, index) => {
+    enemyCells.forEach((content, index) => {
       if (content !== "miss") {
         if (content === "hit") {
           hitCells.push(index);
@@ -35,7 +41,15 @@ export default class Player {
     return { possibleCells, hitCells };
   }
 
-  #chooseNearHit(currentHits, enemyBoard) {
+  /**
+   * Agrega las posiciones adyacentes a cada curremtHit, a un array
+   * y de esas posiciones aquellas las cuales sean validas las agrega
+   * a un array de possibleAttacks
+   * @param {Array} currentHits posiciones con value de hit "[2,4]"
+   * @param {Map} enemyCells Map con cells del enemigo a atacar
+   * @returns possibleAttacks array con las posiciones posibles ["[2,4]","[3,4]"]
+   */
+  #chooseNearHit(currentHits, enemyCells) {
     const possibleAttacks = [];
     currentHits.forEach((hit) => {
       const [x, y] = extractCoordinates(hit);
@@ -53,8 +67,8 @@ export default class Player {
           possition[1] < 10
         ) {
           if (
-            enemyBoard.get(`[${possition[0]},${possition[1]}]`) === "empty" ||
-            enemyBoard.get(`[${possition[0]},${possition[1]}]`) === "ship"
+            enemyCells.get(`[${possition[0]},${possition[1]}]`) === "empty" ||
+            enemyCells.get(`[${possition[0]},${possition[1]}]`) === "ship"
           ) {
             possibleAttacks.push(`[${possition[0]},${possition[1]}]`);
           }
@@ -64,20 +78,33 @@ export default class Player {
     return possibleAttacks;
   }
 
+  /**
+   * Escoge una posicion aleatoria del array y la retorna
+   * @param {Array} possibleAttacks
+   * @returns string con coordenada de ataque formato: "[2,4]"
+   */
   #chooseRandom(possibleAttacks) {
     return possibleAttacks[
       Math.floor(Math.random() * (possibleAttacks.length - 1))
     ];
   }
 
-  getComputerPlay(enemyBoard) {
-    const possibleAttacks = this.#getPosibilities(enemyBoard);
+  /**
+   * Se encarga de escoger un ataque aleatorio de los posibles
+   * Primero verifica si hay ataques posibles cerca de posiciones donde hubo hit
+   * y escoge una posicion aleatoria de esas, en caso de no haber alguna posicion alli
+   * escoge una posicion aleatoria de todas las posiciones validas del board enemigo
+   * @param {Map} enemyCells cells del enemy
+   * @returns
+   */
+  getComputerPlay(enemyCells) {
+    const possibleAttacks = this.#getPosibilities(enemyCells);
     if (possibleAttacks.hitCells.length > 0) {
       const nearHitCells = this.#chooseNearHit(
         possibleAttacks.hitCells,
-        enemyBoard
+        enemyCells
       );
-      if (nearHitCells.length != 0) {
+      if (nearHitCells.length !== 0) {
         return this.#chooseRandom(nearHitCells);
       }
       return this.#chooseRandom(possibleAttacks.possibleCells);
